@@ -19,6 +19,7 @@ declare global {
     interface Window {
         initializeSourcegraph: (isDarkTheme: boolean) => void
         callJava: (request: RequestToJava) => Promise<object>
+        callJS: (action: string, data: string, callback: (result: string) => void) => void
     }
 }
 
@@ -57,6 +58,15 @@ window.initializeSourcegraph = (isDarkTheme: boolean) => {
         })
     document.documentElement.classList.add('theme')
     document.documentElement.classList.add(isDarkTheme ? 'theme-dark' : 'theme-light')
+}
+
+window.callJS = function (action: string, data: string, callback: (result: string) => void): void {
+    if (action === 'themeChanged') {
+        const root = document.querySelector(':root') as HTMLElement
+        root.style.setProperty('--primary', data)
+        return callback('')
+    }
+    return callback('Unknown action.')
 }
 
 /* Initialize app for standalone server */
