@@ -397,9 +397,6 @@ func Hoist(nodes []Node) ([]Node, error) {
 			if err != nil || patternPart == nil {
 				return nil, errors.New("could not partition first expression")
 			}
-			if !naturallyOrdered(node, false) {
-				return nil, errors.New("unnatural order: patterns not followed by parameter")
-			}
 			pattern = append(pattern, patternPart)
 			scopeParameters = append(scopeParameters, scopePart...)
 			continue
@@ -408,9 +405,6 @@ func Hoist(nodes []Node) ([]Node, error) {
 			scopePart, patternPart, err := PartitionSearchPattern([]Node{node})
 			if err != nil || patternPart == nil {
 				return nil, errors.New("could not partition first expression")
-			}
-			if !naturallyOrdered(node, true) {
-				return nil, errors.New("unnatural order: patterns not followed by parameter")
 			}
 			pattern = append(pattern, patternPart)
 			scopeParameters = append(scopeParameters, scopePart...)
