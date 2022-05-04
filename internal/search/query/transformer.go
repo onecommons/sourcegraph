@@ -2,7 +2,6 @@ package query
 
 import (
 	"fmt"
-	"math"
 	"strings"
 
 	"github.com/grafana/regexp"
@@ -306,44 +305,6 @@ func toParameters(nodes []Node) []Parameter {
 		parameters = append(parameters, n.(Parameter))
 	}
 	return parameters
-}
-
-// naturallyOrdered returns true if, reading the query from left to right,
-// patterns only appear after parameters. When reverse is true it returns true,
-// if, reading from right to left, patterns only appear after parameters.
-func naturallyOrdered(node Node, reverse bool) bool {
-	// This function looks at the position of the rightmost Parameter and
-	// leftmost Pattern range to check ordering (reverse respectively
-	// reverses the position tracking). This because term order in the tree
-	// structure is not guaranteed at all, even under a consistent traversal
-	// (like post-order DFS).
-	rightmostParameterPos := 0
-	rightmostPatternPos := 0
-	leftmostParameterPos := math.MaxInt
-	leftmostPatternPos := math.MaxInt
-	v := &Visitor{
-		Parameter: func(_, _ string, _ bool, a Annotation) {
-			if a.Range.Start.Column > rightmostParameterPos {
-				rightmostParameterPos = a.Range.Start.Column
-			}
-			if a.Range.Start.Column < leftmostParameterPos {
-				leftmostParameterPos = a.Range.Start.Column
-			}
-		},
-		Pattern: func(_ string, _ bool, a Annotation) {
-			if a.Range.Start.Column > rightmostPatternPos {
-				rightmostPatternPos = a.Range.Start.Column
-			}
-			if a.Range.Start.Column < leftmostPatternPos {
-				leftmostPatternPos = a.Range.Start.Column
-			}
-		},
-	}
-	v.Visit(node)
-	if reverse {
-		return leftmostParameterPos > rightmostPatternPos
-	}
-	return rightmostParameterPos < leftmostPatternPos
 }
 
 // Hoist is a heuristic that rewrites simple but possibly ambiguous queries. It
