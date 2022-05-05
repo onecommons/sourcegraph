@@ -312,6 +312,9 @@ func toParameters(nodes []Node) []Parameter {
 // patterns only appear after parameters. When reverse is true it returns true,
 // if, reading from right to left, patterns only appear after parameters.
 func naturallyOrdered(node Node, reverse bool) bool {
+	if node == nil {
+		return false
+	}
 	// This function looks at the position of the rightmost Parameter and
 	// leftmost Pattern range to check ordering (reverse respectively
 	// reverses the position tracking). This because term order in the tree
