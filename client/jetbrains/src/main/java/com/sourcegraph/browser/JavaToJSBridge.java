@@ -1,4 +1,4 @@
-package com.sourcegraph.bridge;
+package com.sourcegraph.browser;
 
 import com.intellij.ui.jcef.JBCefBrowserBase;
 import com.intellij.ui.jcef.JBCefJSQuery;
