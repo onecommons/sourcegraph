@@ -2,7 +2,6 @@ package query
 
 import (
 	"fmt"
-	"math"
 	"strings"
 
 	"github.com/grafana/regexp"
@@ -322,8 +321,8 @@ func naturallyOrdered(node Node, reverse bool) bool {
 	// (like post-order DFS).
 	rightmostParameterPos := 0
 	rightmostPatternPos := 0
-	leftmostParameterPos := math.MaxInt
-	leftmostPatternPos := math.MaxInt
+	leftmostParameterPos := (1 << 30)
+	leftmostPatternPos := (1 << 30)
 	// v := &Visitor{
 	/*
 		Parameter: func(_, _ string, _ bool, a Annotation) {
