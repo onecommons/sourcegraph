@@ -324,27 +324,27 @@ func naturallyOrdered(node Node, reverse bool) bool {
 	rightmostPatternPos := 0
 	leftmostParameterPos := math.MaxInt
 	leftmostPatternPos := math.MaxInt
-	v := &Visitor{
-		/*
-			Parameter: func(_, _ string, _ bool, a Annotation) {
-				if a.Range.Start.Column > rightmostParameterPos {
-					rightmostParameterPos = a.Range.Start.Column
-				}
-				if a.Range.Start.Column < leftmostParameterPos {
-					leftmostParameterPos = a.Range.Start.Column
-				}
-			},
-			Pattern: func(_ string, _ bool, a Annotation) {
-				if a.Range.Start.Column > rightmostPatternPos {
-					rightmostPatternPos = a.Range.Start.Column
-				}
-				if a.Range.Start.Column < leftmostPatternPos {
-					leftmostPatternPos = a.Range.Start.Column
-				}
-			},
-		*/
-	}
-	v.Visit(node)
+	// v := &Visitor{
+	/*
+		Parameter: func(_, _ string, _ bool, a Annotation) {
+			if a.Range.Start.Column > rightmostParameterPos {
+				rightmostParameterPos = a.Range.Start.Column
+			}
+			if a.Range.Start.Column < leftmostParameterPos {
+				leftmostParameterPos = a.Range.Start.Column
+			}
+		},
+		Pattern: func(_ string, _ bool, a Annotation) {
+			if a.Range.Start.Column > rightmostPatternPos {
+				rightmostPatternPos = a.Range.Start.Column
+			}
+			if a.Range.Start.Column < leftmostPatternPos {
+				leftmostPatternPos = a.Range.Start.Column
+			}
+		},
+	*/
+	// }
+	// v.Visit(node)
 	if reverse {
 		return leftmostParameterPos > rightmostPatternPos
 	}
