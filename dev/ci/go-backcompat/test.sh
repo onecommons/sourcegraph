@@ -4,7 +4,7 @@
 # of the continuous backwards compatibility regression tests.
 
 cd "$(dirname "${BASH_SOURCE[0]}")/../../../"
-set -eux
+set -eu
 
 MIGRATION_STAGING=$(mktemp -d -t sgdockerbuild_XXXXXXX)
 cleanup() {
@@ -133,10 +133,10 @@ fi
 # Re-run asdf to ensure we have the correct set of utilities to
 # run the currently checked out version of the Go unit tests.
 echo "--- asdf install checked out tools"
-cat .tool-versions
 ./dev/ci/asdf-install.sh
 
 echo "--- run tests"
+go version
 if ! ./dev/ci/go-test.sh "$@"; then
   annotation=$(
     cat <<EOF
