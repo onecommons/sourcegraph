@@ -9,8 +9,6 @@ import { useAutoFocus } from '../../../hooks/useAutoFocus'
 import { ForwardReferenceComponent } from '../../../types'
 import { Label } from '../../Typography/Label'
 
-import styles from './Input.module.scss'
-
 export enum InputStatus {
     initial = 'initial',
     error = 'error',
@@ -23,7 +21,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: ReactNode
     /** Description block shown below the input. */
     message?: ReactNode
-    /** Custom class name for root label element. */
+    /** Custom class name for root label element . */
     className?: string
     /** Custom class name for input element. */
     inputClassName?: string
@@ -66,11 +64,14 @@ export const Input = forwardRef((props, reference) => {
     const messageClassName = 'form-text font-weight-normal mt-2'
     const inputWithMessage = (
         <>
-            <LoaderInput className={classNames('d-flex', !label && className)} loading={status === InputStatus.loading}>
+            <LoaderInput
+                className={classNames('d-flex loader-input', !label && className)}
+                loading={status === InputStatus.loading}
+            >
                 <Component
                     disabled={disabled}
                     type={type}
-                    className={classNames(styles.input, inputClassName, 'form-control', 'with-invalid-icon', {
+                    className={classNames(inputClassName, 'form-control', 'with-invalid-icon', {
                         'is-valid': status === InputStatus.valid,
                         'is-invalid': error || status === InputStatus.error,
                         'form-control-sm': variant === 'small',

@@ -11,7 +11,17 @@ import classNames from 'classnames'
 import 'storybook-addon-designs'
 
 import { highlightCodeSafe, registerHighlightContributions } from '@sourcegraph/common'
-import { TextArea, Button, ButtonGroup, Link, Select, BUTTON_SIZES, Checkbox, Typography } from '@sourcegraph/wildcard'
+import {
+    TextArea,
+    Button,
+    ButtonGroup,
+    Link,
+    Select,
+    BUTTON_SIZES,
+    Checkbox,
+    Input,
+    Typography,
+} from '@sourcegraph/wildcard'
 
 import { BrandedStory } from '../../components/BrandedStory'
 import { CodeSnippet } from '../../components/CodeSnippet'
@@ -382,7 +392,7 @@ export const InputGroups: Story = () => (
         <Typography.H2>Example</Typography.H2>
         <div>
             <div className="input-group" style={{ maxWidth: '24rem' }}>
-                <input type="search" className="form-control" placeholder="Search code..." aria-label="Search query" />
+                <Input type="search" placeholder="Search code..." aria-label="Search query" />
                 <div className="input-group-append">
                     <Button type="submit" variant="primary">
                         Submit
@@ -406,21 +416,20 @@ export const Forms: Story = () => (
         </p>
         <Form onSubmit={preventDefault}>
             <div className="form-group">
-                <label htmlFor="example-email-input">Email address</label>
-                <input
+                <Input
                     type="email"
-                    className="form-control"
                     id="example-email-input"
                     aria-describedby="email-help"
                     placeholder="me@example.com"
+                    label="Email address"
+                    className="mb-0"
                 />
                 <small id="email-help" className="form-text text-muted">
                     We'll never share your email with anyone else.
                 </small>
             </div>
             <div className="form-group">
-                <label htmlFor="example-input-password">Password</label>
-                <input type="password" className="form-control" id="example-input-password" />
+                <Input type="password" id="example-input-password" className="mb-0" label="Password" />
             </div>
 
             <Select isCustomStyle={true} aria-label="Example select" label="Example select">
@@ -444,8 +453,12 @@ export const Forms: Story = () => (
         <Form>
             <fieldset disabled={true}>
                 <div className="form-group">
-                    <label htmlFor="disabledTextInput">Disabled input</label>
-                    <input type="text" id="disabledTextInput" className="form-control" placeholder="Disabled input" />
+                    <Input
+                        id="disabledTextInput"
+                        placeholder="Disabled input"
+                        className="mb-0"
+                        label="Disabled input"
+                    />
                 </div>
 
                 <Select
@@ -474,7 +487,7 @@ export const Forms: Story = () => (
         <div className="d-flex">
             <fieldset>
                 <div className="form-group">
-                    <input className="form-control form-control-sm mb-1" type="text" placeholder="Small input" />
+                    <Input className="mb-1" placeholder="Small input" variant="small" />
                     <TextArea size="small" className="mb-1" placeholder="Small textarea" />
                     <Select
                         isCustomStyle={true}

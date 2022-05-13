@@ -6,7 +6,7 @@ import { Form } from '@sourcegraph/branded/src/components/Form'
 import { LoaderInput } from '@sourcegraph/branded/src/components/LoaderInput'
 import { currentAuthStateQuery } from '@sourcegraph/shared/src/auth'
 import { CurrentAuthStateResult, CurrentAuthStateVariables } from '@sourcegraph/shared/src/graphql-operations'
-import { Alert, Typography } from '@sourcegraph/wildcard'
+import { Alert, Typography, Input } from '@sourcegraph/wildcard'
 
 import { WebviewPageProps } from '../../platform/context'
 
@@ -140,26 +140,25 @@ export const AuthSidebarView: React.FunctionComponent<React.PropsWithChildren<Au
             </p>
             <p className={classNames(styles.ctaButtonWrapperWithContextBelow)}>
                 <LoaderInput loading={state === 'validating'}>
-                    <label htmlFor="access-token-input">Access Token</label>
-                    <input
-                        className={classNames('input form-control', styles.ctaInput)}
+                    <Input
+                        inputClassName={classNames('input', styles.ctaInput)}
                         id="access-token-input"
-                        type="text"
                         name="token"
                         required={true}
                         autoFocus={true}
                         spellCheck={false}
                         disabled={state === 'validating'}
                         placeholder="ex 6dfc880b320dff712d9f6cfcac5cbd13ebfad1d8"
+                        label="Access Token"
+                        className="mb-0"
                     />
                 </LoaderInput>
             </p>
             {usePrivateInstance && (
                 <p className={classNames(styles.ctaButtonWrapperWithContextBelow)}>
                     <LoaderInput loading={state === 'validating'}>
-                        <label htmlFor="instance-url-input">Sourcegraph Instance URL</label>
-                        <input
-                            className={classNames('input form-control', styles.ctaInput)}
+                        <Input
+                            inputClassName={classNames('input', styles.ctaInput)}
                             id="instance-url-input"
                             type="url"
                             name="instance-url"
@@ -168,6 +167,8 @@ export const AuthSidebarView: React.FunctionComponent<React.PropsWithChildren<Au
                             spellCheck={false}
                             disabled={state === 'validating'}
                             placeholder="ex https://sourcegraph.example.com"
+                            label="Sourcegraph Instance URL"
+                            className="mb-0"
                         />
                     </LoaderInput>
                 </p>
