@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 
 import { SubmissionErrors } from '../../../../components/form/hooks/useForm'
 import { MinimalSearchBasedInsightData } from '../../../../core/backend/code-insights-backend-types'
-import { InsightExecutionType, SearchBasedInsight, isSearchBackendBasedInsight } from '../../../../core/types'
+import { SearchBasedInsight } from '../../../../core/types'
 import { CreateInsightFormFields, InsightStep } from '../../creation/search-insight'
 import { createDefaultEditSeries } from '../../creation/search-insight/components/search-insight-creation-content/hooks/use-editable-series'
 import { SearchInsightCreationContent } from '../../creation/search-insight/components/search-insight-creation-content/SearchInsightCreationContent'
@@ -19,44 +19,26 @@ export const EditSearchBasedInsight: React.FunctionComponent<
 > = props => {
     const { insight, onSubmit, onCancel } = props
 
-    const insightFormValues = useMemo<CreateInsightFormFields>(() => {
-        if (insight.executionType === InsightExecutionType.Backend) {
-            return {
-                title: insight.title,
-                repositories: '',
-                series: insight.series.map(line => createDefaultEditSeries({ ...line, valid: true })),
-                stepValue: Object.values(insight.step)[0]?.toString() ?? '3',
-                step: Object.keys(insight.step)[0] as InsightStep,
-                allRepos: true,
-                dashboardReferenceCount: insight.dashboardReferenceCount,
-            }
-        }
-
-        return {
+    const insightFormValues = useMemo<CreateInsightFormFields>(
+        () => ({
             title: insight.title,
-            repositories: insight.repositories.join(', '),
+            repositories: insight.repositories ? insight.repositories.join(', ') : '',
             series: insight.series.map(line => createDefaultEditSeries({ ...line, valid: true })),
             stepValue: Object.values(insight.step)[0]?.toString() ?? '3',
             step: Object.keys(insight.step)[0] as InsightStep,
-            allRepos: false,
+            allRepos: !insight.repositories,
             dashboardReferenceCount: insight.dashboardReferenceCount,
-        }
-    }, [insight])
+        }),
+        [insight]
+    )
 
     // Handlers
     const handleSubmit = (values: CreateInsightFormFields): SubmissionErrors | Promise<SubmissionErrors> | void => {
         const sanitizedInsight = getSanitizedSearchInsight(values)
-
-        // Preserve backend insight filters since these filters aren't represented
-        // in the editing form
-        if (sanitizedInsight.executionType === InsightExecutionType.Backend && isSearchBackendBasedInsight(insight)) {
-            return onSubmit({
-                ...sanitizedInsight,
-                filters: insight.filters,
-            })
-        }
-
-        return onSubmit(sanitizedInsight)
+        return onSubmit({
+            ...sanitizedInsight,
+            filters: insight.filters,
+        })
     }
 
     return (

@@ -24,7 +24,6 @@ export const createInsightView = (insight: InsightViewNode): Insight => {
 
     switch (insight.presentation.__typename) {
         case 'LineChartInsightViewPresentation': {
-
             const isCaptureGroupInsight = insight.dataSeriesDefinitions.some(
                 series => series.generatedFromCaptureGroups
             )
@@ -78,6 +77,7 @@ export const createInsightView = (insight: InsightViewNode): Insight => {
                 executionType: InsightExecutionType.Backend,
                 type: InsightType.SearchBased,
                 title: presentation.title,
+                repositories,
                 series,
                 step,
                 filters: {
@@ -86,7 +86,6 @@ export const createInsightView = (insight: InsightViewNode): Insight => {
                     context: appliedFilters.searchContexts?.[0] ?? '',
                 },
             }
-
         }
         case 'PieChartInsightViewPresentation': {
             // At the moment BE doesn't have a special fragment type for Lang Stats repositories.
