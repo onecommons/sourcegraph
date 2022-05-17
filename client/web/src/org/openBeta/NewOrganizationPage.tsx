@@ -210,11 +210,9 @@ export const NewOrgOpenBetaPage: React.FunctionComponent<React.PropsWithChildren
             <Form className="mb-3" onSubmit={onSubmit}>
                 {error && <ErrorAlert className="mb-3" error={getError(error)} />}
                 <div className={classNames('form-group', styles.formItem)}>
-                    <label htmlFor="new-org-page__form-name">Organization name</label>
-                    <input
+                    <Input
                         id="new-org-page__form-name"
-                        type="text"
-                        className="form-control test-new-org-name-input mb-2"
+                        inputClassName="test-new-org-name-input mb-2"
                         maxLength={ORG_NAME_MAX_LENGTH}
                         required={true}
                         autoCorrect="off"
@@ -224,6 +222,8 @@ export const NewOrgOpenBetaPage: React.FunctionComponent<React.PropsWithChildren
                         onChange={onDisplayNameChange}
                         disabled={loading}
                         aria-describedby="new-org-page__form-name-help"
+                        label="Organization name"
+                        className="mb-0"
                     />
                     <small id="new-org-page__form-name-help" className="form-text text-muted">
                         This will be your organization’s name on Sourcegraph. You can change this any time.
@@ -237,6 +237,7 @@ export const NewOrgOpenBetaPage: React.FunctionComponent<React.PropsWithChildren
                         autoCorrect="off"
                         value={orgId}
                         label="Organization ID"
+                        className="mb-0"
                         required={true}
                         pattern={VALID_ORG_NAME_REGEXP}
                         maxLength={ORG_NAME_MAX_LENGTH}

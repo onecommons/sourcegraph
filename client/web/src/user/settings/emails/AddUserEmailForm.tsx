@@ -3,11 +3,10 @@ import React, { FunctionComponent, useMemo, useState } from 'react'
 import classNames from 'classnames'
 
 import { ErrorAlert } from '@sourcegraph/branded/src/components/alerts'
-import { LoaderInput } from '@sourcegraph/branded/src/components/LoaderInput'
 import { asError, isErrorLike, ErrorLike } from '@sourcegraph/common'
 import { gql, dataOrThrowErrors } from '@sourcegraph/http-client'
 import { useInputValidation, deriveInputClassName } from '@sourcegraph/shared/src/util/useInputValidation'
-import { screenReaderAnnounce } from '@sourcegraph/wildcard'
+import { screenReaderAnnounce, Input } from '@sourcegraph/wildcard'
 
 import { requestGraphQL } from '../../../backend/graphql'
 import { LoaderButton } from '../../../components/LoaderButton'
@@ -83,30 +82,29 @@ export const AddUserEmailForm: FunctionComponent<React.PropsWithChildren<Props>>
             </label>
             {/* eslint-disable-next-line react/forbid-elements */}
             <form className="form-inline" onSubmit={onSubmit} noValidate={true}>
-                <LoaderInput
+                {/* <LoaderInput
                     className={classNames(deriveInputClassName(emailState), 'mr-sm-2')}
                     loading={emailState.kind === 'LOADING'}
-                >
-                    <input
-                        id="AddUserEmailForm-email"
-                        type="email"
-                        name="email"
-                        className={classNames(
-                            'form-control test-user-email-add-input',
-                            deriveInputClassName(emailState)
-                        )}
-                        onChange={nextEmailFieldChange}
-                        size={32}
-                        value={emailState.value}
-                        ref={emailInputReference}
-                        required={true}
-                        autoComplete="email"
-                        autoCorrect="off"
-                        autoCapitalize="off"
-                        spellCheck={false}
-                        readOnly={false}
-                    />
-                </LoaderInput>
+                > */}
+                <Input
+                    id="AddUserEmailForm-email"
+                    type="email"
+                    name="email"
+                    inputClassName={classNames('test-user-email-add-input', deriveInputClassName(emailState))}
+                    onChange={nextEmailFieldChange}
+                    size={32}
+                    value={emailState.value}
+                    ref={emailInputReference}
+                    required={true}
+                    autoComplete="email"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    readOnly={false}
+                    status="loading"
+                    className={classNames(deriveInputClassName(emailState), 'mr-sm-2')}
+                />
+                {/* </LoaderInput> */}
                 <LoaderButton
                     loading={statusOrError === 'loading'}
                     label="Add"

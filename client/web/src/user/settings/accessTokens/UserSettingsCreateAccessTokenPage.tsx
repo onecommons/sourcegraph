@@ -19,6 +19,7 @@ import {
     Link,
     Icon,
     Checkbox,
+    Input,
 } from '@sourcegraph/wildcard'
 
 import { AccessTokenScopes } from '../../../auth/accessToken'
@@ -138,15 +139,15 @@ export const UserSettingsCreateAccessTokenPage: React.FunctionComponent<React.Pr
             <Form onSubmit={onSubmit}>
                 <Container className="mb-3">
                     <div className="form-group">
-                        <label htmlFor="user-settings-create-access-token-page__note">Token description</label>
-                        <input
-                            type="text"
-                            className="form-control test-create-access-token-description"
+                        <Input
+                            inputClassName="test-create-access-token-description"
                             id="user-settings-create-access-token-page__note"
                             onChange={onNoteChange}
                             required={true}
                             autoFocus={true}
                             placeholder="What's this token for?"
+                            className="mb-0"
+                            label="Token description"
                         />
                     </div>
                     <div className="form-group mb-0">

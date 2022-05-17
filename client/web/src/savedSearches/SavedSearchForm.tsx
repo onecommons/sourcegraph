@@ -6,7 +6,7 @@ import { Omit } from 'utility-types'
 import { ErrorAlert } from '@sourcegraph/branded/src/components/alerts'
 import { Form } from '@sourcegraph/branded/src/components/Form'
 import { Scalars } from '@sourcegraph/shared/src/graphql-operations'
-import { Container, PageHeader, ProductStatusBadge, Button, Link, Alert, Checkbox } from '@sourcegraph/wildcard'
+import { Container, PageHeader, ProductStatusBadge, Button, Link, Alert, Checkbox, Input } from '@sourcegraph/wildcard'
 
 import { AuthenticatedUser } from '../auth'
 import { NamespaceProps } from '../namespaces'
@@ -89,33 +89,29 @@ export const SavedSearchForm: React.FunctionComponent<React.PropsWithChildren<Sa
             <Form onSubmit={handleSubmit}>
                 <Container className="mb-3">
                     <div className="form-group">
-                        <label className={styles.label} htmlFor="saved-search-form-input-description">
-                            Description
-                        </label>
-                        <input
+                        <Input
                             id="saved-search-form-input-description"
-                            type="text"
                             name="description"
-                            className="form-control test-saved-search-form-input-description"
+                            inputClassName="test-saved-search-form-input-description"
                             placeholder="Description"
                             required={true}
                             value={description}
                             onChange={createInputChangeHandler('description')}
+                            className={classNames('mb-0', styles.label)}
+                            label="Description"
                         />
                     </div>
                     <div className="form-group">
-                        <label className={styles.label} htmlFor="saved-search-form-input-query">
-                            Query
-                        </label>
-                        <input
+                        <Input
                             id="saved-search-form-input-query"
-                            type="text"
                             name="query"
-                            className="form-control test-saved-search-form-input-query"
+                            inputClassName="test-saved-search-form-input-query"
                             placeholder="Query"
                             required={true}
                             value={query}
                             onChange={createInputChangeHandler('query')}
+                            className={classNames('mb-0', styles.label)}
+                            label="Query"
                         />
                     </div>
 
@@ -160,17 +156,14 @@ export const SavedSearchForm: React.FunctionComponent<React.PropsWithChildren<Sa
 
                     {notifySlack && slackWebhookURL && (
                         <div className="form-group mt-3 mb-0">
-                            <label className={styles.label} htmlFor="saved-search-form-input-slack">
-                                Slack notifications
-                            </label>
-                            <input
+                            <Input
                                 id="saved-search-form-input-slack"
-                                type="text"
                                 name="Slack webhook URL"
-                                className="form-control"
                                 value={slackWebhookURL}
                                 disabled={true}
                                 onChange={createInputChangeHandler('slackWebhookURL')}
+                                className={classNames('mb-0', styles.label)}
+                                label="Slack notifications"
                             />
                             <small>
                                 Slack webhooks are deprecated and will be removed in a future Sourcegraph version.

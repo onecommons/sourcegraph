@@ -10,7 +10,17 @@ import { catchError, switchMap, tap } from 'rxjs/operators'
 import { ErrorAlert } from '@sourcegraph/branded/src/components/alerts'
 import { asError } from '@sourcegraph/common'
 import * as GQL from '@sourcegraph/shared/src/schema'
-import { Container, PageHeader, LoadingSpinner, FeedbackText, Button, Link, Alert, Icon } from '@sourcegraph/wildcard'
+import {
+    Container,
+    PageHeader,
+    LoadingSpinner,
+    FeedbackText,
+    Button,
+    Link,
+    Alert,
+    Icon,
+    Input,
+} from '@sourcegraph/wildcard'
 
 import { PageTitle } from '../../components/PageTitle'
 import { Timestamp } from '../../components/time/Timestamp'
@@ -302,16 +312,19 @@ export class RepoSettingsMirrorPage extends React.PureComponent<
                     {this.state.loading && <LoadingSpinner />}
                     {this.state.error && <ErrorAlert error={this.state.error} />}
                     <div className="form-group">
-                        <label>
-                            Remote repository URL{' '}
-                            <small className="text-info">
-                                <Icon as={LockIcon} /> Only visible to site admins
-                            </small>
-                        </label>
-                        <input
-                            className="form-control"
+                        <Input
                             value={this.props.repo.mirrorInfo.remoteURL || '(unknown)'}
                             readOnly={true}
+                            className="mb-0"
+                            label={
+                                <>
+                                    {' '}
+                                    Remote repository URL{' '}
+                                    <small className="text-info">
+                                        <Icon as={LockIcon} /> Only visible to site admins
+                                    </small>
+                                </>
+                            }
                         />
                         {this.state.repo.viewerCanAdminister && (
                             <small className="form-text text-muted">
