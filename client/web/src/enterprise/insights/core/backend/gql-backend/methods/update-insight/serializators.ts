@@ -15,7 +15,7 @@ import {
 import { getStepInterval } from '../../utils/get-step-interval'
 
 export function getSearchInsightUpdateInput(insight: MinimalSearchBasedInsightData): UpdateLineChartSearchInsightInput {
-    const repositories = insight.executionType !== InsightExecutionType.Backend ? insight.repositories : []
+    const repositories = insight.repositories
     const [unit, value] = getStepInterval(insight.step)
     const filters: InsightViewFiltersInput =
         insight.executionType === InsightExecutionType.Backend
