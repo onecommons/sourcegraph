@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 
 import classNames from 'classnames'
 import CodeBracketsIcon from 'mdi-react/CodeBracketsIcon'
+import DiceIcon from 'mdi-react/Dice5Icon'
 import FormatLetterCaseIcon from 'mdi-react/FormatLetterCaseIcon'
 import RegexIcon from 'mdi-react/RegexIcon'
 
@@ -12,10 +13,11 @@ import {
     SearchContextProps,
     SearchPatternTypeMutationProps,
     SubmitSearchProps,
+    FeelingLuckyProps,
 } from '@sourcegraph/search'
 import { KEYBOARD_SHORTCUT_COPY_FULL_QUERY } from '@sourcegraph/shared/src/keyboardShortcuts/keyboardShortcuts'
 import { SearchPatternType } from '@sourcegraph/shared/src/schema'
-import { findFilter, FilterKind } from '@sourcegraph/shared/src/search/query/query'
+import { FilterKind, findFilter } from '@sourcegraph/shared/src/search/query/query'
 import { appendContextFilter } from '@sourcegraph/shared/src/search/query/transformer'
 import { SettingsCascadeProps } from '@sourcegraph/shared/src/settings/settings'
 
@@ -28,6 +30,7 @@ export interface TogglesProps
     extends SearchPatternTypeProps,
         SearchPatternTypeMutationProps,
         CaseSensitivityProps,
+        FeelingLuckyProps,
         SettingsCascadeProps,
         Pick<SearchContextProps, 'selectedSearchContextSpec'>,
         Partial<Pick<SubmitSearchProps, 'submitSearch'>> {
@@ -66,6 +69,8 @@ export const Toggles: React.FunctionComponent<React.PropsWithChildren<TogglesPro
         setPatternType,
         caseSensitive,
         setCaseSensitivity,
+        feelingLucky,
+        setFeelingLucky,
         settingsCascade,
         className,
         selectedSearchContextSpec,
@@ -75,15 +80,18 @@ export const Toggles: React.FunctionComponent<React.PropsWithChildren<TogglesPro
     } = props
 
     const submitOnToggle = useCallback(
-        (args: { newPatternType: SearchPatternType } | { newCaseSensitivity: boolean }): void => {
+        (
+            args: { newPatternType: SearchPatternType } | { newCaseSensitivity: boolean } | { newFeelingLucky: boolean }
+        ): void => {
             submitSearch?.({
                 source: 'filter',
                 patternType: 'newPatternType' in args ? args.newPatternType : patternType,
                 caseSensitive: 'newCaseSensitivity' in args ? args.newCaseSensitivity : caseSensitive,
+                feelingLucky: 'newFeelingLucky' in args ? args.newFeelingLucky : feelingLucky,
                 activation: undefined,
             })
         },
-        [caseSensitive, patternType, submitSearch]
+        [caseSensitive, patternType, feelingLucky, submitSearch]
     )
 
     const toggleCaseSensitivity = useCallback((): void => {
@@ -91,6 +99,14 @@ export const Toggles: React.FunctionComponent<React.PropsWithChildren<TogglesPro
         setCaseSensitivity(newCaseSensitivity)
         submitOnToggle({ newCaseSensitivity })
     }, [caseSensitive, setCaseSensitivity, submitOnToggle])
+
+    // const feelingLucky = true // FIXME
+
+    const toggleFeelingLucky = useCallback((): void => {
+        const newFeelingLucky = !feelingLucky
+        setFeelingLucky(newFeelingLucky)
+        submitOnToggle({ newFeelingLucky })
+    }, [feelingLucky, setFeelingLucky, submitOnToggle])
 
     const toggleRegexp = useCallback((): void => {
         const newPatternType =
@@ -119,59 +135,79 @@ export const Toggles: React.FunctionComponent<React.PropsWithChildren<TogglesPro
 
     return (
         <div className={classNames(className, styles.toggleContainer)}>
-            <QueryInputToggle
-                title="Case sensitivity"
-                isActive={caseSensitive}
-                onToggle={toggleCaseSensitivity}
-                icon={FormatLetterCaseIcon}
-                className="test-case-sensitivity-toggle"
-                activeClassName="test-case-sensitivity-toggle--active"
-                disableOn={[
-                    {
-                        condition: findFilter(navbarSearchQuery, 'case', FilterKind.Subexpression) !== undefined,
-                        reason: 'Query already contains one or more case subexpressions',
-                    },
-                    {
-                        condition: findFilter(navbarSearchQuery, 'patterntype', FilterKind.Subexpression) !== undefined,
-                        reason:
-                            'Query contains one or more patterntype subexpressions, cannot apply global case-sensitivity',
-                    },
-                    {
-                        condition: patternType === SearchPatternType.structural,
-                        reason: 'Structural search is always case sensitive',
-                    },
-                ]}
-            />
-            <QueryInputToggle
-                title="Regular expression"
-                isActive={patternType === SearchPatternType.regexp}
-                onToggle={toggleRegexp}
-                icon={RegexIcon}
-                className="test-regexp-toggle"
-                activeClassName="test-regexp-toggle--active"
-                disableOn={[
-                    {
-                        condition: findFilter(navbarSearchQuery, 'patterntype', FilterKind.Subexpression) !== undefined,
-                        reason: 'Query already contains one or more patterntype subexpressions',
-                    },
-                ]}
-            />
-            {!structuralSearchDisabled && (
+            {feelingLucky ? (
                 <QueryInputToggle
-                    title="Structural search"
-                    className="test-structural-search-toggle"
-                    activeClassName="test-structural-search-toggle--active"
-                    isActive={patternType === SearchPatternType.structural}
-                    onToggle={toggleStructuralSearch}
-                    icon={CodeBracketsIcon}
-                    disableOn={[
-                        {
-                            condition:
-                                findFilter(navbarSearchQuery, 'patterntype', FilterKind.Subexpression) !== undefined,
-                            reason: 'Query already contains one or more patterntype subexpressions',
-                        },
-                    ]}
+                    title="Feeling lucky?"
+                    isActive={feelingLucky}
+                    onToggle={toggleFeelingLucky}
+                    icon={DiceIcon}
+                    className="test-lucky-search-toggle"
+                    activeClassName="test-lucky-search-toggle--active"
+                    disableOn={[]}
                 />
+            ) : (
+                <>
+                    <QueryInputToggle
+                        title="Case sensitivity"
+                        isActive={caseSensitive}
+                        onToggle={toggleCaseSensitivity}
+                        icon={FormatLetterCaseIcon}
+                        className="test-case-sensitivity-toggle"
+                        activeClassName="test-case-sensitivity-toggle--active"
+                        disableOn={[
+                            {
+                                condition:
+                                    findFilter(navbarSearchQuery, 'case', FilterKind.Subexpression) !== undefined,
+                                reason: 'Query already contains one or more case subexpressions',
+                            },
+                            {
+                                condition:
+                                    findFilter(navbarSearchQuery, 'patterntype', FilterKind.Subexpression) !==
+                                    undefined,
+                                reason:
+                                    'Query contains one or more patterntype subexpressions, cannot apply global case-sensitivity',
+                            },
+                            {
+                                condition: patternType === SearchPatternType.structural,
+                                reason: 'Structural search is always case sensitive',
+                            },
+                        ]}
+                    />
+                    <QueryInputToggle
+                        title="Regular expression"
+                        isActive={patternType === SearchPatternType.regexp}
+                        onToggle={toggleRegexp}
+                        icon={RegexIcon}
+                        className="test-regexp-toggle"
+                        activeClassName="test-regexp-toggle--active"
+                        disableOn={[
+                            {
+                                condition:
+                                    findFilter(navbarSearchQuery, 'patterntype', FilterKind.Subexpression) !==
+                                    undefined,
+                                reason: 'Query already contains one or more patterntype subexpressions',
+                            },
+                        ]}
+                    />
+                    {!structuralSearchDisabled && (
+                        <QueryInputToggle
+                            title="Structural search"
+                            className="test-structural-search-toggle"
+                            activeClassName="test-structural-search-toggle--active"
+                            isActive={patternType === SearchPatternType.structural}
+                            onToggle={toggleStructuralSearch}
+                            icon={CodeBracketsIcon}
+                            disableOn={[
+                                {
+                                    condition:
+                                        findFilter(navbarSearchQuery, 'patterntype', FilterKind.Subexpression) !==
+                                        undefined,
+                                    reason: 'Query already contains one or more patterntype subexpressions',
+                                },
+                            ]}
+                        />
+                    )}
+                </>
             )}
             {showCopyQueryButton && (
                 <>

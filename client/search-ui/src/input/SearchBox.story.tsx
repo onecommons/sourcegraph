@@ -32,6 +32,8 @@ const defaultProps: SearchBoxProps = {
     setPatternType: () => {},
     caseSensitive: false,
     setCaseSensitivity: () => {},
+    feelingLucky: false,
+    setFeelingLucky: () => {},
     searchContextsEnabled: true,
     showSearchContext: false,
     showSearchContextManagement: false,

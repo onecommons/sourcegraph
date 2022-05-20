@@ -31,6 +31,7 @@ const mockUseQueryState = create<SearchQueryState>((set, get) => ({
     parametersSource: InitialParametersSource.DEFAULT,
     queryState: { query: '' },
     searchCaseSensitivity: false,
+    searchFeelingLucky: false,
     searchPatternType: SearchPatternType.literal,
     searchQueryFromURL: '',
     setQueryState: queryStateUpdate => {
@@ -45,6 +46,7 @@ const mockUseQueryState = create<SearchQueryState>((set, get) => ({
 
 const defaultProps: SearchSidebarProps = {
     caseSensitive: false,
+    feelingLucky: false,
     patternType: SearchPatternType.literal,
     selectedSearchContextSpec: 'global',
     settingsCascade: EMPTY_SETTINGS_CASCADE,
@@ -56,6 +58,7 @@ const defaultProps: SearchSidebarProps = {
             parameters.query,
             parameters.patternType ?? currentState.searchPatternType,
             parameters.caseSensitive ?? currentState.searchCaseSensitivity,
+            parameters.feelingLucky ?? currentState.searchFeelingLucky,
             parameters.searchContextSpec,
             parameters.searchParametersList
         )

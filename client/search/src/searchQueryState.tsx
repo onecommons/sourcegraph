@@ -71,6 +71,7 @@ export interface SearchQueryState {
     queryState: QueryState
     searchCaseSensitivity: boolean
     searchPatternType: SearchPatternType
+    searchFeelingLucky: boolean
     searchQueryFromURL: string
 
     // ACTIONS
@@ -86,7 +87,7 @@ export interface SearchQueryState {
      * Note that this won't update `queryState` directly.
      */
     submitSearch: (
-        parameters: Omit<SubmitSearchParameters, 'query' | 'caseSensitive' | 'patternType'>,
+        parameters: Omit<SubmitSearchParameters, 'query' | 'caseSensitive' | 'patternType' | 'feelingLucky'>,
         updates?: QueryUpdate[]
     ) => void
 }
@@ -144,6 +145,7 @@ export interface BuildSearchQueryURLParameters {
     query: string
     patternType?: SearchPatternType
     caseSensitive?: boolean
+    feelingLucky?: boolean
     searchContextSpec?: string
     searchParametersList?: { key: string; value: string }[]
 }

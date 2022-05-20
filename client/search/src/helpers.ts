@@ -3,7 +3,7 @@ import * as H from 'history'
 import { ActivationProps } from '@sourcegraph/shared/src/components/activation/Activation'
 import { CharacterRange } from '@sourcegraph/shared/src/search/query/token'
 
-import { CaseSensitivityProps, SearchContextProps, SearchPatternTypeProps } from '.'
+import { CaseSensitivityProps, FeelingLuckyProps, SearchContextProps, SearchPatternTypeProps } from '.'
 
 export enum QueryChangeSource {
     /**
@@ -44,6 +44,7 @@ export interface SubmitSearchParameters
     extends Partial<Pick<ActivationProps, 'activation'>>,
         SearchPatternTypeProps,
         Pick<CaseSensitivityProps, 'caseSensitive'>,
+        Pick<FeelingLuckyProps, 'feelingLucky'>,
         Pick<SearchContextProps, 'selectedSearchContextSpec'> {
     history: H.History
     query: string

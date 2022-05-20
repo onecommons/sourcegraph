@@ -193,6 +193,7 @@ export const StreamingSearchResults: React.FunctionComponent<
     const showSearchContext = useExperimentalFeatures(features => features.showSearchContext ?? false)
     const caseSensitive = useNavbarQueryState(state => state.searchCaseSensitivity)
     const patternType = useNavbarQueryState(state => state.searchPatternType)
+    const feelingLucky = useNavbarQueryState(state => state.searchFeelingLucky)
     const query = useNavbarQueryState(state => state.searchQueryFromURL)
 
     // Log view event on first load
@@ -317,11 +318,12 @@ export const StreamingSearchResults: React.FunctionComponent<
                 ...props,
                 caseSensitive,
                 patternType,
+                feelingLucky,
                 query: applyAdditionalFilters(query, additionalFilters),
                 source: 'excludedResults',
             })
         },
-        [query, telemetryService, patternType, caseSensitive, props]
+        [query, telemetryService, patternType, caseSensitive, feelingLucky, props]
     )
     const [showSidebar, setShowSidebar] = useState(false)
 
@@ -349,6 +351,7 @@ export const StreamingSearchResults: React.FunctionComponent<
                 activation={props.activation}
                 caseSensitive={caseSensitive}
                 patternType={patternType}
+                feelingLucky={feelingLucky}
                 settingsCascade={props.settingsCascade}
                 telemetryService={props.telemetryService}
                 selectedSearchContextSpec={props.selectedSearchContextSpec}
@@ -397,6 +400,7 @@ export const StreamingSearchResults: React.FunctionComponent<
                 query={query}
                 patternType={patternType}
                 caseSensitive={caseSensitive}
+                feelingLucky={feelingLucky}
                 selectedSearchContextSpec={props.selectedSearchContextSpec}
             />
 
@@ -413,7 +417,12 @@ export const StreamingSearchResults: React.FunctionComponent<
                 )}
                 {results?.alert && (
                     <div className={classNames(styles.streamingSearchResultsContentCentered, 'mt-4')}>
-                        <SearchAlert alert={results.alert} caseSensitive={caseSensitive} patternType={patternType} />
+                        <SearchAlert
+                            alert={results.alert}
+                            caseSensitive={caseSensitive}
+                            patternType={patternType}
+                            feelingLucky={feelingLucky}
+                        />
                     </div>
                 )}
                 {ctaToDisplay === 'signup' && (

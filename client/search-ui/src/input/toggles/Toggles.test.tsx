@@ -40,7 +40,9 @@ describe('Toggles', () => {
                     patternType={SearchPatternType.literal}
                     setPatternType={() => undefined}
                     caseSensitive={false}
+                    feelingLucky={false}
                     setCaseSensitivity={() => undefined}
+                    setFeelingLucky={() => undefined}
                     settingsCascade={{ subjects: null, final: {} }}
                     selectedSearchContextSpec="global"
                 />
@@ -56,7 +58,9 @@ describe('Toggles', () => {
                     patternType={SearchPatternType.literal}
                     setPatternType={() => undefined}
                     caseSensitive={false}
+                    feelingLucky={false}
                     setCaseSensitivity={() => undefined}
+                    setFeelingLucky={() => undefined}
                     settingsCascade={{ subjects: null, final: {} }}
                     selectedSearchContextSpec="global"
                 />
@@ -71,7 +75,9 @@ describe('Toggles', () => {
                     patternType={SearchPatternType.literal}
                     setPatternType={() => undefined}
                     caseSensitive={false}
+                    feelingLucky={false}
                     setCaseSensitivity={() => undefined}
+                    setFeelingLucky={() => undefined}
                     settingsCascade={{ subjects: null, final: {} }}
                     selectedSearchContextSpec="global"
                 />

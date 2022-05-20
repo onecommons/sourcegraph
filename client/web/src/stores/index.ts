@@ -15,6 +15,7 @@ export {
     setQueryStateFromSettings,
     setSearchPatternType,
     setSearchCaseSensitivity,
+    setSearchFeelingLucky,
     buildSearchURLQueryFromQueryState,
 } from './navbarSearchQueryState'
 export { useThemeState } from './themeState'

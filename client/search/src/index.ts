@@ -36,6 +36,11 @@ export interface CaseSensitivityProps {
     setCaseSensitivity: (caseSensitive: boolean) => void
 }
 
+export interface FeelingLuckyProps {
+    feelingLucky: boolean
+    setFeelingLucky: (feelingLucky: boolean) => void
+}
+
 export interface SearchContextProps {
     searchContextsEnabled: boolean
     hasUserAddedRepositories: boolean

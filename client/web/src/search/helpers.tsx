@@ -22,6 +22,7 @@ export function submitSearch({
     query,
     patternType,
     caseSensitive,
+    feelingLucky,
     selectedSearchContextSpec,
     activation,
     source,
@@ -31,6 +32,7 @@ export function submitSearch({
         query,
         patternType,
         caseSensitive,
+        feelingLucky,
         selectedSearchContextSpec,
         searchParameters
     )

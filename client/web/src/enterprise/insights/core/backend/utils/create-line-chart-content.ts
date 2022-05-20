@@ -87,7 +87,7 @@ export function generateLinkURL(input: GenerateLinkInput): string {
     const beforeFilter = `before:${before}`
     const dateFilters = `${afterFilter} ${beforeFilter}`
     const diffQuery = `${repoFilter} type:diff ${dateFilters} ${series.query}`
-    const searchQueryParameter = buildSearchURLQuery(diffQuery, SearchPatternType.literal, false)
+    const searchQueryParameter = buildSearchURLQuery(diffQuery, SearchPatternType.literal, false, false)
 
     return `${window.location.origin}${PageRoutes.Search}?${searchQueryParameter}`
 }

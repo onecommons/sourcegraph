@@ -82,7 +82,7 @@ const RepositoryContributorNode: React.FunctionComponent<React.PropsWithChildren
                 </div>
                 <div className={styles.count}>
                     <Link
-                        to={`/search?${buildSearchURLQuery(query, SearchPatternType.literal, false)}`}
+                        to={`/search?${buildSearchURLQuery(query, SearchPatternType.literal, false, false)}`}
                         className="font-weight-bold"
                         data-tooltip={
                             revisionRange?.includes('..') &&

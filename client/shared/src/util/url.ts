@@ -528,6 +528,7 @@ export function buildSearchURLQuery(
     query: string,
     patternType: SearchPatternType,
     caseSensitive: boolean,
+    feelingLucky?: boolean,
     searchContextSpec?: string,
     searchParametersList?: { key: string; value: string }[]
 ): string {

@@ -68,6 +68,7 @@ export const CommunitySearchContextPage: React.FunctionComponent<
         [props.communitySearchContextMetadata.spec, props.telemetryService]
     )
     const caseSensitive = useNavbarQueryState(state => state.searchCaseSensitivity)
+    const feelingLucky = useNavbarQueryState(state => state.searchFeelingLucky)
 
     const contextQuery = `context:${props.communitySearchContextMetadata.spec}`
 
@@ -88,7 +89,14 @@ export const CommunitySearchContextPage: React.FunctionComponent<
     ): void => {
         eventLogger.log('CommunitySearchContextSuggestionClicked')
         event?.preventDefault()
-        submitSearch({ ...props, query, caseSensitive, patternType, source: 'communitySearchContextPage' })
+        submitSearch({
+            ...props,
+            query,
+            caseSensitive,
+            patternType,
+            feelingLucky,
+            source: 'communitySearchContextPage',
+        })
     }
 
     return (

@@ -18,7 +18,7 @@ import { parseSearchURLQuery } from '..'
 import { AuthenticatedUser } from '../../auth'
 import { FuzzyFinder } from '../../components/fuzzyFinder/FuzzyFinder'
 import { useExperimentalFeatures, useNavbarQueryState, setSearchCaseSensitivity } from '../../stores'
-import { NavbarQueryState, setSearchPatternType } from '../../stores/navbarSearchQueryState'
+import { NavbarQueryState, setSearchFeelingLucky, setSearchPatternType } from '../../stores/navbarSearchQueryState'
 import { getExperimentalFeatures } from '../../util/get-experimental-features'
 
 interface Props
@@ -43,10 +43,23 @@ const selectQueryState = ({
     submitSearch,
     searchCaseSensitivity,
     searchPatternType,
+    searchFeelingLucky,
 }: NavbarQueryState): Pick<
     NavbarQueryState,
-    'queryState' | 'setQueryState' | 'submitSearch' | 'searchCaseSensitivity' | 'searchPatternType'
-> => ({ queryState, setQueryState, submitSearch, searchCaseSensitivity, searchPatternType })
+    | 'queryState'
+    | 'setQueryState'
+    | 'submitSearch'
+    | 'searchCaseSensitivity'
+    | 'searchPatternType'
+    | 'searchFeelingLucky'
+> => ({
+    queryState,
+    setQueryState,
+    submitSearch,
+    searchCaseSensitivity,
+    searchPatternType,
+    searchFeelingLucky,
+})
 
 /**
  * The search item in the navbar
@@ -57,10 +70,14 @@ export const SearchNavbarItem: React.FunctionComponent<React.PropsWithChildren<P
     // or remove the search help button
     const isSearchPage = props.location.pathname === '/search' && Boolean(parseSearchURLQuery(props.location.search))
     const [isFuzzyFinderVisible, setIsFuzzyFinderVisible] = useState(false)
-    const { queryState, setQueryState, submitSearch, searchCaseSensitivity, searchPatternType } = useNavbarQueryState(
-        selectQueryState,
-        shallow
-    )
+    const {
+        queryState,
+        setQueryState,
+        submitSearch,
+        searchCaseSensitivity,
+        searchPatternType,
+        searchFeelingLucky: feelingLucky,
+    } = useNavbarQueryState(selectQueryState, shallow)
     const showSearchContext = useExperimentalFeatures(features => features.showSearchContext ?? false)
     const showSearchContextManagement = useExperimentalFeatures(
         features => features.showSearchContextManagement ?? false
@@ -116,6 +133,8 @@ export const SearchNavbarItem: React.FunctionComponent<React.PropsWithChildren<P
                 setCaseSensitivity={setSearchCaseSensitivity}
                 patternType={searchPatternType}
                 setPatternType={setSearchPatternType}
+                feelingLucky={feelingLucky}
+                setFeelingLucky={setSearchFeelingLucky}
                 queryState={queryState}
                 onChange={setQueryState}
                 onSubmit={onSubmit}

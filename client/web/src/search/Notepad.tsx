@@ -637,6 +637,7 @@ function getUIComponentsForEntry(
                         entry.query,
                         entry.patternType,
                         entry.caseSensitive,
+                        false, // FIXME yuck
                         entry.searchContext
                     ),
                 },

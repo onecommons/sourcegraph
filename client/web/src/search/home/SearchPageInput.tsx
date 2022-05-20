@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 
 import * as H from 'history'
-import { NavbarQueryState } from 'src/stores/navbarSearchQueryState'
+import { NavbarQueryState, setSearchFeelingLucky } from 'src/stores/navbarSearchQueryState'
 import shallow from 'zustand/shallow'
 
 import { Form } from '@sourcegraph/branded/src/components/Form'
@@ -11,6 +11,7 @@ import {
     SearchPatternTypeProps,
     SubmitSearchParameters,
     canSubmitSearch,
+    FeelingLuckyProps,
 } from '@sourcegraph/search'
 import { SearchBox } from '@sourcegraph/search-ui'
 import { ActivationProps } from '@sourcegraph/shared/src/components/activation/Activation'
@@ -62,9 +63,10 @@ interface Props
 
 const queryStateSelector = (
     state: NavbarQueryState
-): Pick<CaseSensitivityProps, 'caseSensitive'> & SearchPatternTypeProps => ({
+): Pick<CaseSensitivityProps, 'caseSensitive'> & Pick<FeelingLuckyProps, 'feelingLucky'> & SearchPatternTypeProps => ({
     caseSensitive: state.searchCaseSensitivity,
     patternType: state.searchPatternType,
+    feelingLucky: state.searchFeelingLucky,
 })
 
 export const SearchPageInput: React.FunctionComponent<React.PropsWithChildren<Props>> = (props: Props) => {
@@ -96,6 +98,8 @@ export const SearchPageInput: React.FunctionComponent<React.PropsWithChildren<Pr
         stepsContainer: tourContainer.current ?? undefined,
     })
 
+    const feelingLucky = true // FIXME unhardcode
+
     const submitSearchOnChange = useCallback(
         (parameters: Partial<SubmitSearchParameters> = {}) => {
             const query = props.hiddenQueryPrefix
@@ -109,6 +113,7 @@ export const SearchPageInput: React.FunctionComponent<React.PropsWithChildren<Pr
                     history: props.history,
                     patternType,
                     caseSensitive,
+                    feelingLucky,
                     activation: props.activation,
                     selectedSearchContextSpec: props.selectedSearchContextSpec,
                     ...parameters,
@@ -119,6 +124,7 @@ export const SearchPageInput: React.FunctionComponent<React.PropsWithChildren<Pr
             props.history,
             patternType,
             caseSensitive,
+            feelingLucky,
             props.activation,
             props.selectedSearchContextSpec,
             props.hiddenQueryPrefix,
@@ -149,8 +155,10 @@ export const SearchPageInput: React.FunctionComponent<React.PropsWithChildren<Pr
                         showSearchContextManagement={showSearchContextManagement}
                         caseSensitive={caseSensitive}
                         patternType={patternType}
+                        feelingLucky={feelingLucky}
                         setPatternType={setSearchPatternType}
                         setCaseSensitivity={setSearchCaseSensitivity}
+                        setFeelingLucky={setSearchFeelingLucky}
                         submitSearchOnToggle={submitSearchOnChange}
                         queryState={userQueryState}
                         onChange={setUserQueryState}

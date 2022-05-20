@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo } from 'react'
 
-import { CaseSensitivityProps, SearchPatternTypeProps, SearchContextProps } from '@sourcegraph/search'
+import {
+    CaseSensitivityProps,
+    SearchPatternTypeProps,
+    SearchContextProps,
+    FeelingLuckyProps,
+} from '@sourcegraph/search'
 import { SyntaxHighlightedSearchQuery } from '@sourcegraph/search-ui'
 import { SearchPatternType } from '@sourcegraph/shared/src/graphql-operations'
 import { ALL_LANGUAGES } from '@sourcegraph/shared/src/search/query/languageFilter'
@@ -117,6 +122,7 @@ function getQuerySuggestions(query: string, patternType: SearchPatternType): Sug
 interface DidYouMeanProps
     extends SearchPatternTypeProps,
         Pick<CaseSensitivityProps, 'caseSensitive'>,
+        Pick<FeelingLuckyProps, 'feelingLucky'>,
         Pick<SearchContextProps, 'selectedSearchContextSpec'>,
         TelemetryProps {
     query: string
@@ -127,6 +133,7 @@ export const DidYouMean: React.FunctionComponent<React.PropsWithChildren<DidYouM
     query,
     patternType,
     caseSensitive,
+    feelingLucky,
     selectedSearchContextSpec,
 }) => {
     const suggestions = useMemo(() => getQuerySuggestions(query, patternType), [query, patternType])
@@ -147,6 +154,7 @@ export const DidYouMean: React.FunctionComponent<React.PropsWithChildren<DidYouM
                             suggestion.query,
                             patternType,
                             caseSensitive,
+                            feelingLucky,
                             selectedSearchContextSpec
                         )
                         return (

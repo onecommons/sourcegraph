@@ -242,6 +242,7 @@ export const FormTriggerArea: React.FunctionComponent<React.PropsWithChildren<Tr
                                     to={`/search?${buildSearchURLQuery(
                                         queryState.query,
                                         SearchPatternType.literal,
+                                        false,
                                         false
                                     )}`}
                                     target="_blank"

@@ -96,8 +96,10 @@ const SearchInputExample: React.FunctionComponent<React.PropsWithChildren<Search
                         navbarSearchQuery={query}
                         caseSensitive={false}
                         patternType={patternType}
+                        feelingLucky={false}
                         setCaseSensitivity={noop}
                         setPatternType={noop}
+                        setFeelingLucky={noop}
                         settingsCascade={{ subjects: null, final: {} }}
                         showCopyQueryButton={false}
                         interactive={false}
@@ -108,7 +110,7 @@ const SearchInputExample: React.FunctionComponent<React.PropsWithChildren<Search
     )
 
     if (runnable) {
-        const builtURLQuery = buildSearchURLQuery(query, patternType, false, 'global')
+        const builtURLQuery = buildSearchURLQuery(query, patternType, false, false, 'global')
         return (
             <Link onClick={onRun} to={{ pathname: '/search', search: builtURLQuery }}>
                 <div className={styles.searchInputExample}>

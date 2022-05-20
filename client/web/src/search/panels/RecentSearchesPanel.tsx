@@ -104,6 +104,7 @@ export const RecentSearchesPanel: React.FunctionComponent<React.PropsWithChildre
                                 buildSearchURLQuery(
                                     'lang:c if(:[eval_match]) { :[statement_match] }',
                                     SearchPatternType.structural,
+                                    false,
                                     false
                                 )
                             }
@@ -121,6 +122,7 @@ export const RecentSearchesPanel: React.FunctionComponent<React.PropsWithChildre
                                 buildSearchURLQuery(
                                     'lang:java type:diff after:"1 week ago"',
                                     SearchPatternType.literal,
+                                    false,
                                     false
                                 )
                             }

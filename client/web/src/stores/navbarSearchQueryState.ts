@@ -26,6 +26,7 @@ export const useNavbarQueryState = create<NavbarQueryState>((set, get) => ({
     parametersSource: InitialParametersSource.DEFAULT,
     queryState: { query: '' },
     searchCaseSensitivity: false,
+    searchFeelingLucky: true, // FIXME, is this the correct default?
     searchPatternType: SearchPatternType.literal,
     searchQueryFromURL: '',
 
@@ -42,10 +43,11 @@ export const useNavbarQueryState = create<NavbarQueryState>((set, get) => ({
             queryState: { query },
             searchCaseSensitivity: caseSensitive,
             searchPatternType: patternType,
+            searchFeelingLucky: feelingLucky,
         } = get()
         const updatedQuery = updateQuery(query, updates)
         if (canSubmitSearch(query, parameters.selectedSearchContextSpec)) {
-            submitSearch({ ...parameters, query: updatedQuery, caseSensitive, patternType })
+            submitSearch({ ...parameters, query: updatedQuery, caseSensitive, patternType, feelingLucky })
         }
     },
 }))
@@ -56,6 +58,10 @@ export function setSearchPatternType(searchPatternType: SearchPatternType): void
 
 export function setSearchCaseSensitivity(searchCaseSensitivity: boolean): void {
     useNavbarQueryState.setState({ searchCaseSensitivity })
+}
+
+export function setSearchFeelingLucky(feelingLucky: boolean): void {
+    useNavbarQueryState.setState({ searchFeelingLucky: feelingLucky })
 }
 
 /**
@@ -134,6 +140,7 @@ export function buildSearchURLQueryFromQueryState(parameters: BuildSearchQueryUR
         parameters.query,
         parameters.patternType ?? currentState.searchPatternType,
         parameters.caseSensitive ?? currentState.searchCaseSensitivity,
+        parameters.feelingLucky ?? currentState.searchFeelingLucky,
         parameters.searchContextSpec,
         parameters.searchParametersList
     )

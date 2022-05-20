@@ -233,6 +233,7 @@ export const SearchContextPage: React.FunctionComponent<React.PropsWithChildren<
                                         to={`/search?${buildSearchURLQuery(
                                             searchContextOrError.query,
                                             SearchPatternType.regexp,
+                                            false,
                                             false
                                         )}`}
                                         target="_blank"

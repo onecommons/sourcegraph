@@ -12,6 +12,7 @@ interface SearchAlertProps {
     alert: Required<AggregateStreamingSearchResults>['alert']
     patternType: SearchPatternType | undefined
     caseSensitive: boolean
+    feelingLucky: boolean
     searchContextSpec?: string
     children?: ReactNode[]
 }
@@ -20,6 +21,7 @@ export const SearchAlert: React.FunctionComponent<React.PropsWithChildren<Search
     alert,
     patternType,
     caseSensitive,
+    feelingLucky,
     searchContextSpec,
     children,
 }) => (
@@ -42,6 +44,7 @@ export const SearchAlert: React.FunctionComponent<React.PropsWithChildren<Search
                                         proposedQuery.query,
                                         patternType || SearchPatternType.literal,
                                         caseSensitive,
+                                        feelingLucky,
                                         searchContextSpec
                                     )
                                 }
