@@ -21,7 +21,7 @@
 
     &__visibility {
         :global(.form-check) {
-            margin: 0.5rem 0;
+            margin: 0;
             :global(.form-check-label) {
                 margin-left: 0.21rem;
             }
@@ -55,5 +55,11 @@
     &__static-config {
         margin-top: 0.75rem;
         margin-left: 1.25rem;
+    }
+
+    &__description {
+        font-weight: 500;
+        letter-spacing: -0.016rem;
+        margin-left: 1.46rem;
     }
 }

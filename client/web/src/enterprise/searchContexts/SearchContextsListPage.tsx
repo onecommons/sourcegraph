@@ -106,7 +106,7 @@ export const SearchContextsListPage: React.FunctionComponent<
                             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <Link
                                 to=""
-                                role="button"
+                                role="tab"
                                 onClick={onSelectSearchContextsList}
                                 className={classNames('nav-link', selectedTab === 'list' && 'active')}
                             >
