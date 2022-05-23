@@ -7,7 +7,7 @@ import PlusIcon from 'mdi-react/PlusIcon'
 
 import { SearchContextProps } from '@sourcegraph/search'
 import { PlatformContextProps } from '@sourcegraph/shared/src/platform/context'
-import { PageHeader, Link, Button, Icon } from '@sourcegraph/wildcard'
+import { PageHeader, Link, Button, Icon, TabPanel, TabPanels, Tabs } from '@sourcegraph/wildcard'
 
 import { AuthenticatedUser } from '../../auth'
 import { Page } from '../../components/Page'
@@ -100,13 +100,15 @@ export const SearchContextsListPage: React.FunctionComponent<
                     }
                     className="mb-3"
                 />
-                <div className="mb-4">
-                    <div className="nav nav-tabs">
-                        <div className="nav-item">
+                <Tabs className="mb-4">
+                    <TabPanels id="search-context-list-tab-panel" className="nav nav-tabs" role="tabpanel">
+                        <TabPanel className="nav-item">
                             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <Link
                                 to=""
                                 role="tab"
+                                aria-selected="true"
+                                aria-controls="search-context-list-tab-panel"
                                 onClick={onSelectSearchContextsList}
                                 className={classNames('nav-link', selectedTab === 'list' && 'active')}
                             >
@@ -114,9 +116,9 @@ export const SearchContextsListPage: React.FunctionComponent<
                                     Your search contexts
                                 </span>
                             </Link>
-                        </div>
-                    </div>
-                </div>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
                 {selectedTab === 'list' && <SearchContextsListTab {...props} />}
             </Page>
         </div>

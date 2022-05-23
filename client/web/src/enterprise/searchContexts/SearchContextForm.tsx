@@ -417,8 +417,8 @@ export const SearchContextForm: React.FunctionComponent<React.PropsWithChildren<
                                     </div>
                                 }
                             />
-                            <div className={classNames(styles.searchContextFormDescription, 'mb-2 text-muted')}>
-                                <small>{radio.description}</small>
+                            <div className="ml-4 mb-2">
+                                <small className="text-muted">{radio.description}</small>
                             </div>
                         </>
                     ))}
