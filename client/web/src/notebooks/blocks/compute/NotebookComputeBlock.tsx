@@ -67,7 +67,6 @@ const setupPorts = (sourcegraphURL: string, updateBlockInputWithID: (blockInput:
         const ctrl = new AbortController()
         openRequests.push(ctrl)
         async function fetch(): Promise<void> {
-            
             await fetchEventSource(address, {
                 method: 'POST',
                 headers: {
