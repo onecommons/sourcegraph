@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 import { GitObjectType } from '@sourcegraph/shared/src/graphql-operations'
-import { Typography } from '@sourcegraph/wildcard'
+import { Input } from '@sourcegraph/wildcard'
 
 import { CodeIntelligenceConfigurationPolicyFields } from '../../../../graphql-operations'
 import { nullPolicy } from '../hooks/types'
@@ -36,17 +36,15 @@ export const BranchTargetSettings: FunctionComponent<React.PropsWithChildren<Bra
     return (
         <>
             <div className="form-group">
-                <Typography.Label htmlFor="name">Name</Typography.Label>
-                <input
+                <Input
                     id="name"
-                    type="text"
-                    className="form-control"
                     value={policy.name}
                     onChange={({ target: { value: name } }) => updatePolicy({ name })}
                     disabled={disabled}
                     required={true}
+                    label="Name"
+                    message="Required."
                 />
-                <small className="form-text text-muted">Required.</small>
             </div>
 
             {repoId || policy.repository ? (

@@ -42,28 +42,26 @@ export const ReposMatchingPatternList: FunctionComponent<React.PropsWithChildren
                 </div>
             ) : (
                 <>
-                    <div className={styles.grid}>
-                        {repositoryPatterns.map((repositoryPattern, index) => (
-                            <ReposMatchingPattern
-                                key={index}
-                                index={index}
-                                pattern={repositoryPattern}
-                                setPattern={value =>
-                                    setRepositoryPatterns(repositoryPatterns =>
-                                        (repositoryPatterns || []).map((value_, index_) =>
-                                            index === index_ ? value : value_
-                                        )
+                    {repositoryPatterns.map((repositoryPattern, index) => (
+                        <ReposMatchingPattern
+                            key={index}
+                            index={index}
+                            pattern={repositoryPattern}
+                            setPattern={value =>
+                                setRepositoryPatterns(repositoryPatterns =>
+                                    (repositoryPatterns || []).map((value_, index_) =>
+                                        index === index_ ? value : value_
                                     )
-                                }
-                                onDelete={() =>
-                                    setRepositoryPatterns(repositoryPatterns =>
-                                        (repositoryPatterns || []).filter((___, index_) => index !== index_)
-                                    )
-                                }
-                                disabled={disabled}
-                            />
-                        ))}
-                    </div>
+                                )
+                            }
+                            onDelete={() =>
+                                setRepositoryPatterns(repositoryPatterns =>
+                                    (repositoryPatterns || []).filter((___, index_) => index !== index_)
+                                )
+                            }
+                            disabled={disabled}
+                        />
+                    ))}
 
                     {!disabled && (
                         <>

@@ -34,13 +34,13 @@ exports[`SearchStatsPage limitHit 1`] = `
       class="form"
     >
       <div
-        class="form-group d-flex align-items-stretch"
+        class="container d-flex form-group align-items-stretch"
       >
         <input
           autocapitalize="off"
           autocomplete="off"
           autocorrect="off"
-          class="form-control flex-1 test-stats-query"
+          class="flex-1 form-control with-invalid-icon"
           id="stats-page__query"
           placeholder="Enter a Sourcegraph search query"
           spellcheck="false"
@@ -103,13 +103,13 @@ exports[`SearchStatsPage renders 1`] = `
       class="form"
     >
       <div
-        class="form-group d-flex align-items-stretch"
+        class="container d-flex form-group align-items-stretch"
       >
         <input
           autocapitalize="off"
           autocomplete="off"
           autocorrect="off"
-          class="form-control flex-1 test-stats-query"
+          class="flex-1 form-control with-invalid-icon"
           id="stats-page__query"
           placeholder="Enter a Sourcegraph search query"
           spellcheck="false"

@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators'
 
 import { Form } from '@sourcegraph/branded/src/components/Form'
 import { asError, isErrorLike, ErrorLike } from '@sourcegraph/common'
-import { Badge, Button, LoadingSpinner, useObservable, Alert, Icon, Typography } from '@sourcegraph/wildcard'
+import { Badge, LoadingSpinner, useObservable, Alert, Icon, Typography, Input, Button } from '@sourcegraph/wildcard'
 
 import { querySearchResultsStats } from './backend'
 import { SearchStatsLanguages } from './SearchStatsLanguages'
@@ -63,25 +63,26 @@ export const SearchStatsPage: React.FunctionComponent<React.PropsWithChildren<Pr
                 </Typography.H2>
             </header>
             <Form onSubmit={onSubmit} className="form">
-                <div className="form-group d-flex align-items-stretch">
-                    <input
-                        id="stats-page__query"
-                        className="form-control flex-1 test-stats-query"
-                        type="search"
-                        placeholder="Enter a Sourcegraph search query"
-                        value={uncommittedQuery}
-                        onChange={onUncommittedQueryChange}
-                        autoCapitalize="off"
-                        spellCheck={false}
-                        autoCorrect="off"
-                        autoComplete="off"
-                    />
-                    {uncommittedQuery !== query && (
-                        <Button type="submit" className="ml-2 test-stats-query-update" variant="primary">
-                            Update
-                        </Button>
-                    )}
-                </div>
+                <Input
+                    id="stats-page__query"
+                    className="form-group align-items-stretch"
+                    inputClassName="flex-1"
+                    type="search"
+                    placeholder="Enter a Sourcegraph search query"
+                    value={uncommittedQuery}
+                    onChange={onUncommittedQueryChange}
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    autoCorrect="off"
+                    autoComplete="off"
+                    inputSymbol={
+                        uncommittedQuery !== query && (
+                            <Button type="submit" className="ml-2" variant="primary">
+                                Update
+                            </Button>
+                        )
+                    }
+                />
             </Form>
             <hr className="my-3" />
             {stats === undefined ? (

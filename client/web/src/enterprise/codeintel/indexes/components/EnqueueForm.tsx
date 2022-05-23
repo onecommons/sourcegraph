@@ -3,7 +3,7 @@ import { FunctionComponent, useCallback, useState } from 'react'
 import { Subject } from 'rxjs'
 
 import { ErrorAlert } from '@sourcegraph/branded/src/components/alerts'
-import { Button, Alert, Typography } from '@sourcegraph/wildcard'
+import { Button, Alert, Input, Typography } from '@sourcegraph/wildcard'
 
 import { useEnqueueIndexJob } from '../hooks/useEnqueueIndexJob'
 
@@ -55,24 +55,25 @@ export const EnqueueForm: FunctionComponent<React.PropsWithChildren<EnqueueFormP
             <div className="form-inline">
                 <Typography.Label htmlFor="revlike">Git revlike</Typography.Label>
 
-                <input
-                    type="text"
+                <Input
                     id="revlike"
-                    className="form-control ml-2"
+                    inputClassName="ml-2"
+                    className="d-inline-flex justify-content-start"
                     value={revlike}
                     onChange={event => setRevlike(event.target.value)}
+                    inputSymbol={
+                        <Button
+                            type="button"
+                            title="Enqueue thing"
+                            disabled={state === State.Queueing}
+                            className="ml-2"
+                            variant="primary"
+                            onClick={enqueue}
+                        >
+                            Enqueue
+                        </Button>
+                    }
                 />
-
-                <Button
-                    type="button"
-                    title="Enqueue thing"
-                    disabled={state === State.Queueing}
-                    className="ml-2"
-                    variant="primary"
-                    onClick={enqueue}
-                >
-                    Enqueue
-                </Button>
             </div>
 
             {state === State.Queued && queueResult !== undefined && (

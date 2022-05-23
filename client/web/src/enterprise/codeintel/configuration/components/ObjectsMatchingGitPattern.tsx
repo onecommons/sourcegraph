@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 
 import { debounce } from 'lodash'
 
-import { Typography } from '@sourcegraph/wildcard'
+import { Input } from '@sourcegraph/wildcard'
 
 import { GitObjectType } from '../../../../graphql-operations'
 
@@ -34,11 +34,10 @@ export const ObjectsMatchingGitPattern: FunctionComponent<React.PropsWithChildre
         <>
             {type !== GitObjectType.GIT_COMMIT && (
                 <div className="form-group">
-                    <Typography.Label htmlFor="pattern">Pattern</Typography.Label>
-                    <input
+                    <Input
                         id="pattern"
-                        type="text"
-                        className="form-control text-monospace"
+                        label="Pattern"
+                        inputClassName="text-monospace"
                         value={localPattern}
                         onChange={({ target: { value } }) => {
                             setLocalPattern(value)
@@ -46,8 +45,8 @@ export const ObjectsMatchingGitPattern: FunctionComponent<React.PropsWithChildre
                         }}
                         disabled={disabled}
                         required={true}
+                        message="Required"
                     />
-                    <small className="form-text text-muted">Required.</small>
                 </div>
             )}
             {repoId && <GitObjectPreviewWrapper repoId={repoId} type={type} pattern={pattern} />}
