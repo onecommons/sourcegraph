@@ -27,6 +27,7 @@ export const LegendItem: React.FunctionComponent<React.PropsWithChildren<LegendI
     color,
     name,
     className,
+    children,
     ...attributes
 }) => (
     <li {...attributes} className={classNames(styles.legendItem, className)}>
@@ -35,6 +36,6 @@ export const LegendItem: React.FunctionComponent<React.PropsWithChildren<LegendI
             style={{ backgroundColor: color }}
             className={styles.legendMark}
         />
-        {name}
+        {children || name}
     </li>
 )
