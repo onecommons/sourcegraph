@@ -337,7 +337,6 @@ export const SearchContextForm: React.FunctionComponent<React.PropsWithChildren<
                             authenticatedUser={authenticatedUser}
                         />
                     </div>
-                    {/* <div className=""> */}
                     <Input
                         className="flex-1 mb-0"
                         inputClassName={styles.searchContextFormNameInput}
@@ -352,7 +351,6 @@ export const SearchContextForm: React.FunctionComponent<React.PropsWithChildren<
                             setName(event.target.value)
                         }}
                     />
-                    {/* </div> */}
                 </div>
                 <div className="text-muted my-2">
                     <small>
