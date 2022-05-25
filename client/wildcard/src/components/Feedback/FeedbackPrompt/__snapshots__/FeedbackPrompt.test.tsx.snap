@@ -282,21 +282,20 @@ exports[`FeedbackPrompt should render submit error correctly 1`] = `
     <div
       aria-modal="true"
       class="floatingPanel popover menu"
-      hidden=""
       role="dialog"
     >
       <div
         data-focus-guard="true"
         style="width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;"
-        tabindex="0"
+        tabindex="-1"
       />
       <div
         data-focus-guard="true"
         style="width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;"
-        tabindex="1"
+        tabindex="-1"
       />
       <div
-        data-focus-lock-disabled="false"
+        data-focus-lock-disabled="disabled"
       >
         <button
           class="close"
@@ -541,7 +540,7 @@ exports[`FeedbackPrompt should render submit error correctly 1`] = `
       <div
         data-focus-guard="true"
         style="width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;"
-        tabindex="0"
+        tabindex="-1"
       />
     </div>
   </div>
@@ -565,20 +564,21 @@ exports[`FeedbackPrompt should render submit success correctly 1`] = `
     <div
       aria-modal="true"
       class="floatingPanel popover menu"
+      hidden=""
       role="dialog"
     >
       <div
         data-focus-guard="true"
         style="width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;"
-        tabindex="-1"
+        tabindex="0"
       />
       <div
         data-focus-guard="true"
         style="width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;"
-        tabindex="-1"
+        tabindex="1"
       />
       <div
-        data-focus-lock-disabled="disabled"
+        data-focus-lock-disabled="false"
       >
         <button
           class="close"
@@ -636,7 +636,7 @@ exports[`FeedbackPrompt should render submit success correctly 1`] = `
       <div
         data-focus-guard="true"
         style="width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;"
-        tabindex="-1"
+        tabindex="0"
       />
     </div>
   </div>

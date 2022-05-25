@@ -32,7 +32,7 @@ export const ModalVideo: React.FunctionComponent<React.PropsWithChildren<ModalVi
 }) => {
     const [isOpen, setIsOpen] = useState(false)
     const toggleDialog = useCallback(
-        isOpen => {
+        (isOpen: boolean) => {
             setIsOpen(isOpen)
             if (onToggle) {
                 onToggle(isOpen)

@@ -48,7 +48,7 @@ const handleErrorSubmit = () =>
         isHappinessFeedback: false,
     })
 
-export const FeedbackPromptWithSuccessResponse = () => (
+export const FeedbackPromptWithSuccessResponse: Story = () => (
     <>
         <Typography.H1>This is a feedbackPrompt with success response</Typography.H1>
         <FeedbackPrompt onSubmit={handleSuccessSubmit}>

@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { createAggregateError } from '@sourcegraph/common'
-import { gql } from '@sourcegraph/http-client'
+import { gql, GraphQLResult } from '@sourcegraph/http-client'
 import * as GQL from '@sourcegraph/shared/src/schema'
 import { Typography } from '@sourcegraph/wildcard'
 
@@ -87,7 +87,7 @@ function queryLicenses(args: { first?: number; query?: string }): Observable<GQL
               `,
               vars
           ).pipe(
-              map(({ data, errors }) => {
+              map(({ data, errors }: GraphQLResult<any>) => {
                   if (!data || !data.dotcom || !data.dotcom.productLicenses || (errors && errors.length > 0)) {
                       throw createAggregateError(errors)
                   }

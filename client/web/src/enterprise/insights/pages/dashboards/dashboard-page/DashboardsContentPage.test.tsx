@@ -173,7 +173,7 @@ const triggerDashboardMenuItem = async (screen: RenderWithBrandedContextResult &
     // We're simulating keyboard navigation here to circumvent a bug in ReachUI
     // does not respond to programmatic click events on menu items
     dashboardMenuItem.focus()
-    user.keyboard(' ')
+    user.click(dashboardMenuItem)
 }
 
 beforeEach(() => {
@@ -240,7 +240,7 @@ describe('DashboardsContent', () => {
 
         await triggerDashboardMenuItem(screen, /Delete/)
 
-        const addInsightHeader = await waitFor(() => screen.getByRole('heading', { name: /Delete/ }))
+        const addInsightHeader = screen.getByTestId('delete-modal')
         expect(addInsightHeader).toBeInTheDocument()
     })
 

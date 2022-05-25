@@ -116,12 +116,12 @@ const editorActionComments = {
     //    (https://docs.sourcegraph.com/admin/repo/permissions#sudo-access-token).`,
 }
 
-const Field = (props: { children: React.ReactChildren | string | string[] }): JSX.Element => (
-    <Typography.Code className="hljs-type">{props.children}</Typography.Code>
+const Field: React.FunctionComponent<React.PropsWithChildren<{}>> = ({ children }) => (
+    <Typography.Code className="hljs-type">{children}</Typography.Code>
 )
 
-const Value = (props: { children: React.ReactChildren | string | string[] }): JSX.Element => (
-    <Typography.Code className="hljs-attr">{props.children}</Typography.Code>
+const Value: React.FunctionComponent<React.PropsWithChildren<{}>> = ({ children }) => (
+    <Typography.Code className="hljs-attr">{children}</Typography.Code>
 )
 
 const githubInstructions = (isEnterprise: boolean): JSX.Element => (

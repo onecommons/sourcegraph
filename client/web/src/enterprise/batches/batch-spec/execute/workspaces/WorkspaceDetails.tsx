@@ -518,11 +518,12 @@ const WorkspaceStep: React.FunctionComponent<React.PropsWithChildren<WorkspaceSt
                                         <p className="text-muted mb-0">No output variables specified</p>
                                     )}
                                     <ul className="mb-0">
-                                        {step.outputVariables?.map(variable => (
-                                            <li key={variable.name}>
-                                                {variable.name}: {variable.value}
-                                            </li>
-                                        ))}
+                                        {!!step.outputVariables &&
+                                            step.outputVariables.map(variable => (
+                                                <li key={variable.name}>
+                                                    {variable.name}: {String(variable.value)}
+                                                </li>
+                                            ))}
                                     </ul>
                                 </TabPanel>
                                 <TabPanel className="pt-2" key="diff">

@@ -1,5 +1,4 @@
-import { render, cleanup, RenderResult, fireEvent, act } from '@testing-library/react'
-import { renderHook, RenderHookResult } from '@testing-library/react-hooks'
+import { render, cleanup, RenderResult, fireEvent, act, renderHook, RenderHookResult } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import sinon from 'sinon'
 
@@ -94,7 +93,10 @@ describe('Tour.tsx', () => {
     })
 
     test('handles closing tour and triggers event log', () => {
-        const [{ getByTestId }, { result }] = renderTour()
+        const [{ getByTestId }, { result }]: [
+            RenderResult,
+            RenderHookResult<any, QuickStartTourListState>
+        ] = renderTour()
         expect(getByTestId('tour-content')).toBeTruthy()
 
         fireEvent.click(getByTestId('tour-close-btn'))
@@ -107,7 +109,10 @@ describe('Tour.tsx', () => {
     })
 
     test('handles "type=video" step and triggers event log', () => {
-        const [{ getByTestId, getByText }, { result }] = renderTour()
+        const [{ getByTestId, getByText }, { result }]: [
+            RenderResult,
+            RenderHookResult<any, QuickStartTourListState>
+        ] = renderTour()
         // clicking video step will open a video modal
         fireEvent.click(getByText(StepVideo.label))
         expect(getByTestId('modal-video')).toBeTruthy()
@@ -123,7 +128,7 @@ describe('Tour.tsx', () => {
     })
 
     test('handles "type=link" step and triggers event log', () => {
-        const [{ getByText }, { result }] = renderTour()
+        const [{ getByText }, { result }]: [RenderResult, RenderHookResult<any, QuickStartTourListState>] = renderTour()
         fireEvent.click(getByText(StepLink.label))
         expect(
             mockLog.withArgs(TourId + StepLink.id + 'Clicked', { language: undefined }, { language: undefined })
@@ -133,7 +138,7 @@ describe('Tour.tsx', () => {
     })
 
     test('handles "type=link" language specific step and triggers event log', () => {
-        const [{ getByText }, { result }] = renderTour()
+        const [{ getByText }, { result }]: [RenderResult, RenderHookResult<any, QuickStartTourListState>] = renderTour()
         fireEvent.click(getByText(StepLanguageSpecificLink.label))
         expect(
             mockLog.withArgs(
@@ -162,7 +167,7 @@ describe('Tour.tsx', () => {
     })
 
     test('handles "type=restart" and triggers event log', () => {
-        const [{ getByText }, { result }] = renderTour()
+        const [{ getByText }, { result }]: [RenderResult, RenderHookResult<any, QuickStartTourListState>] = renderTour()
 
         fireEvent.click(getByText(StepLink.label))
         expect(result.current.tours[TourId].completedStepIds?.includes(StepLink.id)).toBeTruthy()
@@ -177,7 +182,9 @@ describe('Tour.tsx', () => {
     })
 
     test('handles completing tour and triggers event log', () => {
-        const [{ getByText }, { result }] = renderTour([{ title: 'task', steps: [StepLink] }])
+        const [{ getByText }, { result }]: [RenderResult, RenderHookResult<any, QuickStartTourListState>] = renderTour([
+            { title: 'task', steps: [StepLink] },
+        ])
         act(() => {
             fireEvent.click(getByText(StepLink.label))
         })

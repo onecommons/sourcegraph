@@ -17,7 +17,7 @@ import {
 
 import { FileSearchResult, limitGroup } from './FileSearchResult'
 
-jest.mock('react-visibility-sensor', (): typeof _VisibilitySensor => ({ children, onChange }) => (
+jest.mock('react-visibility-sensor', (): typeof _VisibilitySensor => ({ children, onChange }: any) => (
     <>
         <MockVisibilitySensor onChange={onChange}>{children}</MockVisibilitySensor>
     </>
