@@ -35,17 +35,16 @@ export const BranchTargetSettings: FunctionComponent<React.PropsWithChildren<Bra
 
     return (
         <>
-            <div className="form-group">
-                <Input
-                    id="name"
-                    value={policy.name}
-                    onChange={({ target: { value: name } }) => updatePolicy({ name })}
-                    disabled={disabled}
-                    required={true}
-                    label="Name"
-                    message="Required."
-                />
-            </div>
+            <Input
+                id="name"
+                className="form-group"
+                value={policy.name}
+                onChange={({ target: { value: name } }) => updatePolicy({ name })}
+                disabled={disabled}
+                required={true}
+                label="Name"
+                message="Required."
+            />
 
             {repoId || policy.repository ? (
                 <div className="mb-3">

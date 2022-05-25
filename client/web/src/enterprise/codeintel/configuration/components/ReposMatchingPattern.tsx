@@ -32,7 +32,7 @@ export const ReposMatchingPattern: FunctionComponent<React.PropsWithChildren<Rep
 
     return (
         <>
-            <div className="form-group d-flex flex-column mb-0">
+            <div className="d-flex flex-column mb-0">
                 <Input
                     type="text"
                     inputClassName="text-monospace"
@@ -44,7 +44,7 @@ export const ReposMatchingPattern: FunctionComponent<React.PropsWithChildren<Rep
                     disabled={disabled}
                     required={true}
                     label={`Repository pattern #${index + 1}`}
-                    message={<small className="form-text text-muted">Required.</small>}
+                    message="Required."
                     inputSymbol={
                         <span className={classNames(styles.button, 'd-none d-md-inline-flex align-items-center ml-3')}>
                             <Button variant="icon" onClick={() => onDelete()} className="p-0" disabled={disabled}>

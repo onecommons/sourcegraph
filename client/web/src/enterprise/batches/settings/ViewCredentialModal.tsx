@@ -29,9 +29,7 @@ export const ViewCredentialModal: React.FunctionComponent<React.PropsWithChildre
             />
 
             <Typography.H4>Personal access token</Typography.H4>
-            <div className="form-group">
-                <Input value="PATs cannot be viewed after entering." disabled={true} />
-            </div>
+            <Input className="form-group" value="PATs cannot be viewed after entering." disabled={true} />
 
             <hr className="mb-3" />
 
