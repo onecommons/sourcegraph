@@ -21,10 +21,6 @@ export enum InputStatus {
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     /** text label of input. */
     label?: ReactNode
-    /** text description, display as tooltip when label is hovered. */
-    labelTitle?: string
-    /** Determines if label should be displayed inline. */
-    inlineLabel?: boolean
     /** Description block shown below the input. */
     message?: ReactNode
     /** Custom class name for root label element. */
@@ -54,8 +50,6 @@ export const Input = forwardRef((props, reference) => {
         variant = 'regular',
         formControl = true,
         label,
-        labelTitle,
-        inlineLabel,
         message,
         className,
         inputClassName,
