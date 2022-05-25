@@ -341,7 +341,7 @@ export const SearchContextForm: React.FunctionComponent<React.PropsWithChildren<
                         className="flex-1 mb-0"
                         inputClassName={styles.searchContextFormNameInput}
                         aria-labelledby="context-name-label"
-                        label="Context name"
+                        label={<span className="font-weight-normal">Context name</span>}
                         data-testid="search-context-name-input"
                         value={name}
                         pattern="^[a-zA-Z0-9_\-\/\.]+$"
