@@ -72,6 +72,8 @@ func NewSource(db database.DB, svc *types.ExternalService, cf *httpcli.Factory) 
 		return NewNpmPackagesSource(svc, cf)
 	case extsvc.KindPythonPackages:
 		return NewPythonPackagesSource(svc, cf)
+	case extsvc.KindRustPackages:
+		return NewRustPackagesSource(svc, cf)
 	case extsvc.KindOther:
 		return NewOtherSource(svc, cf)
 	default:
