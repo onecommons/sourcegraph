@@ -7,12 +7,14 @@ import PlusIcon from 'mdi-react/PlusIcon'
 
 import { SearchContextProps } from '@sourcegraph/search'
 import { PlatformContextProps } from '@sourcegraph/shared/src/platform/context'
-import { PageHeader, Link, Button, Icon, TabPanel, TabPanels, Tabs } from '@sourcegraph/wildcard'
+import { PageHeader, Link, Button, Icon, Tabs, Tab, TabList } from '@sourcegraph/wildcard'
 
 import { AuthenticatedUser } from '../../auth'
 import { Page } from '../../components/Page'
 
 import { SearchContextsListTab } from './SearchContextsListTab'
+
+import styles from './SearchContextsListPage.module.scss'
 
 export interface SearchContextsListPageProps
     extends Pick<
@@ -101,23 +103,20 @@ export const SearchContextsListPage: React.FunctionComponent<
                     className="mb-3"
                 />
                 <Tabs className="mb-4">
-                    <TabPanels id="search-context-list-tab-panel" className="nav nav-tabs" role="tabpanel">
-                        <TabPanel className="nav-item">
+                    <TabList>
+                        <Tab className="nav-item">
                             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <Link
                                 to=""
-                                role="tab"
-                                aria-selected="true"
-                                aria-controls="search-context-list-tab-panel"
                                 onClick={onSelectSearchContextsList}
-                                className={classNames('nav-link', selectedTab === 'list' && 'active')}
+                                className={classNames('nav-link', selectedTab === 'list' && styles.navItemLink)}
                             >
                                 <span className="text-content" data-tab-content="Your search contexts">
                                     Your search contexts
                                 </span>
                             </Link>
-                        </TabPanel>
-                    </TabPanels>
+                        </Tab>
+                    </TabList>
                 </Tabs>
                 {selectedTab === 'list' && <SearchContextsListTab {...props} />}
             </Page>

@@ -1,0 +1,8 @@
+.nav-item-link {
+    color: var(--body-color);
+
+    &:hover,
+    &:focus {
+        color: var(--body-color);
+    }
+}
