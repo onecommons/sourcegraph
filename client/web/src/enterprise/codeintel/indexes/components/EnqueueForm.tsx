@@ -57,23 +57,21 @@ export const EnqueueForm: FunctionComponent<React.PropsWithChildren<EnqueueFormP
 
                 <Input
                     id="revlike"
-                    inputClassName="ml-2"
-                    className="d-inline-flex justify-content-start"
+                    className="ml-2"
                     value={revlike}
                     onChange={event => setRevlike(event.target.value)}
-                    inputSymbol={
-                        <Button
-                            type="button"
-                            title="Enqueue thing"
-                            disabled={state === State.Queueing}
-                            className="ml-2"
-                            variant="primary"
-                            onClick={enqueue}
-                        >
-                            Enqueue
-                        </Button>
-                    }
                 />
+
+                <Button
+                    type="button"
+                    title="Enqueue thing"
+                    disabled={state === State.Queueing}
+                    className="ml-2"
+                    variant="primary"
+                    onClick={enqueue}
+                >
+                    Enqueue
+                </Button>
             </div>
 
             {state === State.Queued && queueResult !== undefined && (

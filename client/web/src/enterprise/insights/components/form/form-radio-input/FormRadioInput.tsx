@@ -4,6 +4,8 @@ import classNames from 'classnames'
 
 import { Typography, Input } from '@sourcegraph/wildcard'
 
+import styles from './FormRadioInput.module.scss'
+
 interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
     /** Title of radio input. */
     title: string
@@ -29,7 +31,7 @@ export const FormRadioInput: React.FunctionComponent<React.PropsWithChildren<Rad
                 'text-muted': otherProps.disabled,
             })}
         >
-            <Input formControl={false} type="radio" {...otherProps} />
+            <Input inputClassName={styles.inputRadio} type="radio" {...otherProps} />
 
             <span className="pl-2">{title}</span>
 

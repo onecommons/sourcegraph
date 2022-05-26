@@ -161,7 +161,6 @@ export const CodeMonitorForm: React.FunctionComponent<React.PropsWithChildren<Co
                         <Input
                             id="code-monitor-form-name"
                             className="mb-2"
-                            inputClassName="test-name-input"
                             data-testid="name-input"
                             required={true}
                             onChange={event => {

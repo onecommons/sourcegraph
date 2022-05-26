@@ -63,26 +63,25 @@ export const SearchStatsPage: React.FunctionComponent<React.PropsWithChildren<Pr
                 </Typography.H2>
             </header>
             <Form onSubmit={onSubmit} className="form">
-                <Input
-                    id="stats-page__query"
-                    className="form-group align-items-stretch"
-                    inputClassName="flex-1"
-                    type="search"
-                    placeholder="Enter a Sourcegraph search query"
-                    value={uncommittedQuery}
-                    onChange={onUncommittedQueryChange}
-                    autoCapitalize="off"
-                    spellCheck={false}
-                    autoCorrect="off"
-                    autoComplete="off"
-                    inputSymbol={
-                        uncommittedQuery !== query && (
-                            <Button type="submit" className="ml-2" variant="primary">
-                                Update
-                            </Button>
-                        )
-                    }
-                />
+                <div className="form-group d-flex">
+                    <Input
+                        id="stats-page__query"
+                        className="mb-0 w-100"
+                        type="search"
+                        placeholder="Enter a Sourcegraph search query"
+                        value={uncommittedQuery}
+                        onChange={onUncommittedQueryChange}
+                        autoCapitalize="off"
+                        spellCheck={false}
+                        autoCorrect="off"
+                        autoComplete="off"
+                    />
+                    {uncommittedQuery !== query && (
+                        <Button type="submit" className="ml-2" variant="primary">
+                            Update
+                        </Button>
+                    )}
+                </div>
             </Form>
             <hr className="my-3" />
             {stats === undefined ? (

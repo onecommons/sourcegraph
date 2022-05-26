@@ -36,8 +36,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     disabled?: boolean
     /** Determines the size of the input */
     variant?: 'regular' | 'small'
-    /** Determines if the class "form-control" is added on input */
-    formControl?: boolean
 }
 
 /**
@@ -48,7 +46,6 @@ export const Input = forwardRef((props, reference) => {
         as: Component = 'input',
         type = 'text',
         variant = 'regular',
-        formControl = true,
         label,
         message,
         className,
@@ -76,7 +73,7 @@ export const Input = forwardRef((props, reference) => {
                     className={classNames(
                         inputClassName,
                         status === InputStatus.loading && styles.inputLoading,
-                        formControl && 'form-control',
+                        'form-control',
                         'with-invalid-icon',
                         {
                             'is-valid': status === InputStatus.valid,

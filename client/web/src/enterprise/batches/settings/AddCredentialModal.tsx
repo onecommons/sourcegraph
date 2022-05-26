@@ -202,7 +202,7 @@ export const AddCredentialModal: React.FunctionComponent<React.PropsWithChildren
                                     name="token"
                                     type="password"
                                     autoComplete="off"
-                                    inputClassName="test-add-credential-modal-input"
+                                    data-testid="test-add-credential-modal-input"
                                     required={true}
                                     spellCheck="false"
                                     minLength={1}
