@@ -19,7 +19,6 @@ import (
 	"time"
 
 	"github.com/cespare/xxhash/v2"
-	"github.com/inconshreveable/log15"
 	"github.com/neelance/parallel"
 	"github.com/opentracing-contrib/go-stdlib/nethttp"
 	"github.com/opentracing/opentracing-go/ext"
@@ -29,6 +28,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/semaphore"
+
+	logger "github.com/sourcegraph/sourcegraph/lib/log"
 
 	"github.com/sourcegraph/go-diff/diff"
 	"github.com/sourcegraph/go-rendezvous"
@@ -1361,6 +1362,8 @@ func (c *ClientImplementor) do(ctx context.Context, repo api.RepoName, method, u
 
 func (c *ClientImplementor) CreateCommitFromPatch(ctx context.Context, req protocol.CreateCommitFromPatchRequest) (string, error) {
 	resp, err := c.httpPost(ctx, req.Repo, "create-commit-from-patch", req)
+	log := logger.Scoped("create commit", "create commit from patch")
+
 	if err != nil {
 		return "", err
 	}
@@ -1368,14 +1371,14 @@ func (c *ClientImplementor) CreateCommitFromPatch(ctx context.Context, req proto
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log15.Warn("reading gitserver create-commit-from-patch response", "err", err.Error())
+		log.Warn("reading gitserver create-commit-from-patch response", logger.Error(err))
 		return "", &url.Error{URL: resp.Request.URL.String(), Op: "CreateCommitFromPatch", Err: errors.Errorf("CreateCommitFromPatch: http status %d %s", resp.StatusCode, err.Error())}
 	}
 
 	var res protocol.CreateCommitFromPatchResponse
 	err = json.Unmarshal(data, &res)
 	if err != nil {
-		log15.Warn("decoding gitserver create-commit-from-patch response", "err", err.Error())
+		log.Warn("decoding gitserver create-commit-from-patch response", logger.Error(err))
 		return "", &url.Error{URL: resp.Request.URL.String(), Op: "CreateCommitFromPatch", Err: errors.Errorf("CreateCommitFromPatch: http status %d %s", resp.StatusCode, string(data))}
 	}
 
@@ -1386,6 +1389,8 @@ func (c *ClientImplementor) CreateCommitFromPatch(ctx context.Context, req proto
 }
 
 func (c *ClientImplementor) GetObject(ctx context.Context, repo api.RepoName, objectName string) (*gitdomain.GitObject, error) {
+	log := logger.Scoped("get object", "get object logger")
+
 	if ClientMocks.GetObject != nil {
 		return ClientMocks.GetObject(repo, objectName)
 	}
@@ -1402,14 +1407,14 @@ func (c *ClientImplementor) GetObject(ctx context.Context, repo api.RepoName, ob
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log15.Warn("reading gitserver get-object response", "err", err.Error())
+		log.Warn("reading gitserver get-object response", logger.Error(err))
 		return nil, &url.Error{URL: resp.Request.URL.String(), Op: "GetObject", Err: errors.Errorf("GetObject: http status %d %s", resp.StatusCode, err.Error())}
 	}
 
 	var res protocol.GetObjectResponse
 	err = json.Unmarshal(data, &res)
 	if err != nil {
-		log15.Warn("decoding gitserver get-object response", "err", err.Error())
+		log.Warn("decoding gitserver get-object response", logger.Error(err))
 		return nil, &url.Error{URL: resp.Request.URL.String(), Op: "GetObject", Err: errors.Errorf("GetObject: http status %d %s", resp.StatusCode, string(data))}
 	}
 
