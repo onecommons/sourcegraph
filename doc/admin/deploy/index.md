@@ -22,9 +22,9 @@ We recommend the Kubernetes deployment type if your deployment scenario includes
 
 | Deployment Type | Suggested for | Setup time | Resource isolation | Auto-healing | Multi-machine | Complexity |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------- | :----------------: | :----------: | :-----------: | :--------: |
-| [Kubernetes with Helm](kubernetes/helm.md) | Production deployments of any size | 5 - 90 minutes | YES | YES | YES | Easy - Hard |
-| [Docker Compose](docker-compose/index.md) | Production deployments where Kubernetes with Helm is not viable | 5 - 30 minutes | YES | YES | NO | Easy - Medium |
-| [Kubernetes without Helm](kubernetes/index.md) | Production deployments of any size | 30 - 90 minutes | YES | YES | YES| Medium - Hard |
+| [Kubernetes with Helm](kubernetes/helm.md) | Production deployments of any size | ~~5 - 90~~ <br> 1 - 20 minutes | YES | YES | YES | Easy - Hard |
+| [Docker Compose](docker-compose/index.md) | Production deployments where Kubernetes with Helm is not viable  | ~~5 - 30~~ <br> 2 - 10 minutes | YES | YES | NO | Easy - Medium |
+| [Kubernetes without Helm](kubernetes/index.md) | Production deployments of any size | ~~30 - 90~~ <br> 5 - 30 minutes | YES | YES | YES| Medium - Hard |
 | [Docker Single Container](docker-single-container/index.md) | Local testing _(Not recommended for production)_ | 1 minute | NO | NO | NO | Easy |
 
 Each of the deployment types listed in the table above provides a different level of capability. As mentioned previously, base your deployment type on the needs of your business. However, you should also consider the technical expertise available for your deployment. The sections below provide more detailed recommendations for each deployment type.
@@ -37,11 +37,15 @@ Kubernetes provides resource isolation (from other services or applications), au
 
 Helm provides a simple mechanism for deployment customizations, as well as a much simpler upgrade experience.
 
+[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
+
 ### [Docker Compose](docker-compose/index.md)
 
 Docker Compose is recommended for small and medium-size deployments where Kubernetes with Helm is not a viable option. 
 
 It does not provide multi-machine capability such as high availability, but will require less setup time overall.
+
+[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
 ### [Kubernetes without Helm](kubernetes/index.md)
 
@@ -50,6 +54,8 @@ Before making a decision to deploy via Kubernetes without Helm, checkout our [Ku
 If you are unable to use Helm to deploy, but still want to use Kubernetes, follow our [Kubernetes deployment documentation](kubernetes/index.md). 
 
 This path will require advanced knowledge of Kubernetes. For team's without the ability to support this, please speak to your Sourcegraph contact about using Docker Compose instead. 
+
+[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
 ### [Docker Single Container](docker-single-container/index.md) 
 
