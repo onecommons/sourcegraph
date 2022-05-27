@@ -31,31 +31,31 @@ Each of the deployment types listed in the table above provides a different leve
 
 ### [Kubernetes with Helm](kubernetes/helm.md)
 
+[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
+
 We recommend Kubernetes with Helm for most production deployments. 
 
 Kubernetes provides resource isolation (from other services or applications), automated-healing, and far greater ability to scale.
 
 Helm provides a simple mechanism for deployment customizations, as well as a much simpler upgrade experience.
 
-[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
-
 ### [Docker Compose](docker-compose/index.md)
+
+[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
 Docker Compose is recommended for small and medium-size deployments where Kubernetes with Helm is not a viable option. 
 
 It does not provide multi-machine capability such as high availability, but will require less setup time overall.
 
-[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
-
 ### [Kubernetes without Helm](kubernetes/index.md)
+
+[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
 Before making a decision to deploy via Kubernetes without Helm, checkout our [Kubernetes with Helm docs](kubernetes/helm.md) for additional information on why we [recommend using Helm](kubernetes/helm.md#why-use-helm).
 
 If you are unable to use Helm to deploy, but still want to use Kubernetes, follow our [Kubernetes deployment documentation](kubernetes/index.md). 
 
 This path will require advanced knowledge of Kubernetes. For team's without the ability to support this, please speak to your Sourcegraph contact about using Docker Compose instead. 
-
-[![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
 ### [Docker Single Container](docker-single-container/index.md) 
 
