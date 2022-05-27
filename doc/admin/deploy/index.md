@@ -33,6 +33,8 @@ Each of the deployment types listed in the table above provides a different leve
 
 [![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
+Or follow these [manual instructions (4959 words)](kubernetes/helm.md)
+
 We recommend Kubernetes with Helm for most production deployments. 
 
 Kubernetes provides resource isolation (from other services or applications), automated-healing, and far greater ability to scale.
@@ -43,6 +45,8 @@ Helm provides a simple mechanism for deployment customizations, as well as a muc
 
 [![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
 
+Or follow these [manual instructions (2683 words)](docker-compose/index.md)
+
 Docker Compose is recommended for small and medium-size deployments where Kubernetes with Helm is not a viable option. 
 
 It does not provide multi-machine capability such as high availability, but will require less setup time overall.
@@ -50,6 +54,8 @@ It does not provide multi-machine capability such as high availability, but will
 ### [Kubernetes without Helm](kubernetes/index.md)
 
 [![unfurl](https://app.dev.unfurl.cloud/blueprints/apostrophe/deploybutton.svg?cloud=1&type=inverse)](https://www.unfurl.cloud/)
+
+Or follow these [manual instructions (5 pages, 8000 words)](kubernetes/index.md)
 
 Before making a decision to deploy via Kubernetes without Helm, checkout our [Kubernetes with Helm docs](kubernetes/helm.md) for additional information on why we [recommend using Helm](kubernetes/helm.md#why-use-helm).
 
